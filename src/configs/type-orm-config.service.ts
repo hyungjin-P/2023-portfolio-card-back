@@ -11,6 +11,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
     return {
       namingStrategy: new SnakeNamingStrategy(),
       type: 'mysql',
+      autoLoadEntities: true,
       synchronize: false,
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       timezone: 'Z',

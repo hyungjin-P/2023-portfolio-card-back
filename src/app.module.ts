@@ -5,14 +5,13 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './configs/type-orm-config.service';
 import { UserModule } from './repositories/user/user.module';
+import { DataSource } from 'typeorm';
+import { NowStage } from './enums/now.stage';
 
-enum Stage {
-  DEVELOPMENT = 'development',
-  PRODUCTION = 'production',
-}
-
-const stage = Stage.DEVELOPMENT;
-// const stage = Stage.PRODUCTION;
+const stage =
+  process.env.NODE_ENV === 'production'
+    ? NowStage.PRODUCTION
+    : NowStage.DEVELOPMENT;
 
 @Module({
   imports: [
@@ -28,4 +27,6 @@ const stage = Stage.DEVELOPMENT;
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}

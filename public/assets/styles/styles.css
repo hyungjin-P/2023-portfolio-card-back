@@ -41,7 +41,7 @@ body {
   margin-top: 20px;
   font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
   color: lightgray;
 
 }
@@ -49,8 +49,8 @@ body {
 .main-container .main-container-wrapper .go-to-links {
   padding-top: 80px;
   font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
   color: white;
 }
 
