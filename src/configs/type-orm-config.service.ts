@@ -9,6 +9,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
+      logging: this.configService.get('DATABASE_QUERY_LOGGING'),
       namingStrategy: new SnakeNamingStrategy(),
       type: 'mysql',
       autoLoadEntities: true,

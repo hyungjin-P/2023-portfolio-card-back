@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
+import { UserProfile } from "../user-profile/user-profile.entity";
 
 @Entity()
 export class User {
@@ -42,4 +43,7 @@ export class User {
   @Column()
   @ApiProperty({ description: '삭제일자' })
   deletedAt: Date;
+
+  @OneToMany(() => UserProfile, (userProfile) => userProfile.user)
+  userProfiles: UserProfile[];
 }

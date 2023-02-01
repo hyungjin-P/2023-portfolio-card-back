@@ -1,9 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from './user.entity';
 
 @Controller('user')
+@ApiTags('사용자 프로필')
 export class UserController {
   constructor(private userService: UserService) {}
 
