@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
@@ -19,5 +19,36 @@ export class UserService {
         userProfiles: true,
       },
     });
+  }
+
+  async createUser(): Promise<User> {
+    const newUser: User = new User();
+    newUser.provider = 'crackit.com';
+
+    const savedUser = await this.userRepository.save(newUser);
+
+    Logger.log(`savedUser : ${JSON.stringify(savedUser)}`);
+
+    return savedUser;
+  }
+
+  async modifyUser(user: User): Promise<User> {
+    const savedUser = await this.userRepository.save(user);
+    console.log('user ', user);
+    return savedUser;
+  }
+
+  async deleteUser(userId: string): Promise<void> {
+    console.log('userId > ', userId);
+
+    const deleteUser: User = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    console.log(deleteUser);
+
+    await this.userRepository.delete({ id: userId });
   }
 }
