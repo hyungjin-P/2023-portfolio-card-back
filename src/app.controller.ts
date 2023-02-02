@@ -1,8 +1,9 @@
 import { Controller, Get, Render } from '@nestjs/common';
 import { AppService } from './app.service';
-import * as fs from 'fs';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
+@ApiTags('API 문서 뷰')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -11,5 +12,4 @@ export class AppController {
   getHello(): any {
     return { message: 'dev' };
   }
-
 }

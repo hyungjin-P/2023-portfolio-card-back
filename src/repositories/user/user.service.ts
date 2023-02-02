@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
@@ -34,18 +34,19 @@ export class UserService {
 
   async modifyUser(user: User): Promise<User> {
     const savedUser = await this.userRepository.save(user);
-    console.log('user ', user);
     return savedUser;
   }
 
   async deleteUser(userId: string): Promise<void> {
-    console.log('userId > ', userId);
-
     const deleteUser: User = await this.userRepository.findOne({
       where: {
         id: userId,
       },
     });
+
+    if (!deleteUser) {
+      throw new HttpException({ message: '삭제할 사용자가 없습니다.' }, 200);
+    }
 
     console.log(deleteUser);
 
