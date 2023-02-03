@@ -78,6 +78,6 @@ export class PortfolioService {
       );
     }
 
-    await this.portfolioRepository.delete(targetPortfolio);
+    await this.portfolioRepository.delete({ id: targetPortfolio.id });
   }
 }

@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, Patch,
   Post,
   Put,
   Query,
@@ -47,7 +47,7 @@ export class UserController {
     return await this.userService.createUser();
   }
 
-  @Put('/modify')
+  @Patch('/modify')
   @ApiOperation({
     summary: '사용자 수정',
     description: '사용자 수정',

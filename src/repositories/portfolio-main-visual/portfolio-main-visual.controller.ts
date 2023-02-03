@@ -12,22 +12,10 @@ export class PortfolioMainVisualController {
   @Post('/create')
   @ApiOperation({
     summary: '포트폴리오 메인비주얼 추가',
-    description: '',
-    requestBody: {
-      content: {
-        'application/json': {
-          schema: {
-            example: {
-              portfolioId: '6ae6d61e-4462-4412-9ecd-394b24575795',
-            },
-          },
-        },
-      },
-    },
   })
   async savePortfolioMainVisual(
     @Body() portfolioMainVisual: PortfolioMainVisualEntityDto,
-  ): Promise<PortfolioMainVisual | void> {
+  ): Promise<PortfolioMainVisual> {
     return await this.portfolioMainVisualService.createPortfolioMainVisual(
       portfolioMainVisual,
     );

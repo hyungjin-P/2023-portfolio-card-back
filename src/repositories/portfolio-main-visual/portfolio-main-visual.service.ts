@@ -22,7 +22,7 @@ export class PortfolioMainVisualService {
 
     if (!portfolioMainVisualList) {
       throw new HttpException(
-        { message: '포트폴링 메인이 존재하지 않습니다. ' },
+        { message: '포트폴리오 메인이 존재하지 않습니다. ' },
         200,
       );
     }
@@ -60,6 +60,6 @@ export class PortfolioMainVisualService {
         200,
       );
     }
-    await this.portfolioMainVisualRepository.delete(portfolioMainVisual);
+    await this.portfolioMainVisualRepository.remove(portfolioMainVisual);
   }
 }

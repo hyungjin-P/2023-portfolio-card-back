@@ -2,7 +2,6 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
 import { Portfolio } from './portfolio.entity';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { User } from '../user/user.entity';
 
 @Controller('portfolio')
 @ApiTags('포트폴리오')

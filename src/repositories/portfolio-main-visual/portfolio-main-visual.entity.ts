@@ -1,12 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Portfolio } from '../portfolio/portfolio.entity';
+import { CommonEntity } from '../common/common.entity';
+import { PortfolioMainVisualTag } from '../portfolio-main-visual-tag/portfolio-main-visual-tag.entity';
 
 @Entity('portfolio_main_visual')
-export class PortfolioMainVisual {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class PortfolioMainVisual extends CommonEntity {
   @Column()
   portfolioId: string;
 
@@ -22,15 +20,9 @@ export class PortfolioMainVisual {
   @Column()
   subTitle: string;
 
-  @Column({ default: true })
-  createdAt: Date;
-
-  @Column({ default: true })
-  updatedAt: Date;
-
-  @Column()
-  deletedAt: Date;
-
   @ManyToOne(() => Portfolio, (portfolio) => portfolio.portfolioMainVisuals)
   portfolio: Portfolio;
+
+  @OneToMany(() => PortfolioMainVisualTag, (tag) => tag.portfolioMainVisual)
+  portfolioMainVisualTags: PortfolioMainVisualTag[];
 }

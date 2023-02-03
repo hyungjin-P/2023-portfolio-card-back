@@ -9,6 +9,8 @@ import { DataSource } from 'typeorm';
 import { NowStage } from './enums/now.stage';
 import { PortfolioModule } from './repositories/portfolio/portfolio.module';
 import { PortfolioMainVisualModule } from './repositories/portfolio-main-visual/portfolio-main-visual.module';
+import { PortfolioMainVisualThemeModule } from './repositories/portfolio-main-visual-theme/portfolio-main-visual-theme.module';
+import { PortfolioMainVisualTagModule } from './repositories/portfolio-main-visual-tag/portfolio-main-visual-tag.module';
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -27,6 +29,8 @@ const stage =
     UserModule,
     PortfolioModule,
     PortfolioMainVisualModule,
+    PortfolioMainVisualThemeModule,
+    PortfolioMainVisualTagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
