@@ -1,7 +1,14 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Portfolio } from '../portfolio/portfolio.entity';
 import { CommonEntity } from '../common/common.entity';
 import { PortfolioMainVisualTag } from '../portfolio-main-visual-tag/portfolio-main-visual-tag.entity';
+import { PortfolioMainVisualTheme } from '../portfolio-main-visual-theme/portfolio-main-visual-theme.entity';
 
 @Entity('portfolio_main_visual')
 export class PortfolioMainVisual extends CommonEntity {
@@ -25,4 +32,10 @@ export class PortfolioMainVisual extends CommonEntity {
 
   @OneToMany(() => PortfolioMainVisualTag, (tag) => tag.portfolioMainVisual)
   portfolioMainVisualTags: PortfolioMainVisualTag[];
+
+  @OneToMany(
+    () => PortfolioMainVisualTheme,
+    (theme) => theme.portfolioMainVisual,
+  )
+  portfolioMainVisualThemes: PortfolioMainVisualTheme[];
 }

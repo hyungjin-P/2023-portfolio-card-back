@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { CommonEntity } from '../common/common.entity';
+import { PortfolioMainVisual } from '../portfolio-main-visual/portfolio-main-visual.entity';
 
 @Entity('portfolio_main_visual_theme')
 export class PortfolioMainVisualTheme extends CommonEntity {
@@ -20,4 +21,10 @@ export class PortfolioMainVisualTheme extends CommonEntity {
 
   @Column()
   tagClass: string;
+
+  @ManyToOne(
+    () => PortfolioMainVisual,
+    (mainVisual) => mainVisual.portfolioMainVisualThemes,
+  )
+  portfolioMainVisual: PortfolioMainVisual;
 }

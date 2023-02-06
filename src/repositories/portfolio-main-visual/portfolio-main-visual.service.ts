@@ -10,13 +10,12 @@ export class PortfolioMainVisualService {
     private portfolioMainVisualRepository: Repository<PortfolioMainVisual>,
   ) {}
 
-  async findAllPortfolioMainVisual(
-    portfolioId: string,
-  ): Promise<PortfolioMainVisual[]> {
+  async getAll(): Promise<PortfolioMainVisual[]> {
     const portfolioMainVisualList: PortfolioMainVisual[] =
       await this.portfolioMainVisualRepository.find({
-        where: {
-          portfolioId,
+        relations: {
+          portfolioMainVisualTags: true,
+          portfolioMainVisualThemes: true,
         },
       });
 
@@ -28,6 +27,43 @@ export class PortfolioMainVisualService {
     }
 
     return portfolioMainVisualList;
+  }
+
+  async findOne(portfolioId: string): Promise<PortfolioMainVisual> {
+    const portfolioMainVisualList: PortfolioMainVisual[] =
+      await this.portfolioMainVisualRepository.find({
+        where: {
+          portfolioId,
+        },
+        relations: {
+          portfolioMainVisualTags: true,
+          portfolioMainVisualThemes: true,
+        },
+        order: {
+          updatedAt: 'DESC',
+          portfolioMainVisualThemes: {
+            createdAt: 'DESC',
+          },
+        },
+      });
+
+    if (!portfolioMainVisualList) {
+      throw new HttpException(
+        { message: '포트폴리오 메인이 존재하지 않습니다. ' },
+        200,
+      );
+    }
+
+    if (portfolioMainVisualList[0].portfolioMainVisualThemes.length > 0) {
+      const firstPortfolioMainVisual =
+        portfolioMainVisualList[0].portfolioMainVisualThemes[0];
+
+      portfolioMainVisualList[0].portfolioMainVisualThemes = [
+        firstPortfolioMainVisual,
+      ];
+    }
+
+    return portfolioMainVisualList[0];
   }
 
   async createPortfolioMainVisual(

@@ -16,10 +16,6 @@ export class PortfolioMainVisualTagService {
     const t = await this.portfolioMainVisualTagRepository.save(
       portfolioMainVisualTag,
     );
-
-    console.log('portfolioMainVisualTag, ', t);
-
-    // throw new Error();
     return t;
   }
 

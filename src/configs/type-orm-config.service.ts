@@ -7,9 +7,11 @@ import { ConfigService } from '@nestjs/config';
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   constructor(private configService: ConfigService) {}
 
+  logging: boolean = this.configService.get('DATABASE_QUERY_LOGGING');
+
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      logging: this.configService.get('DATABASE_QUERY_LOGGING'),
+      logging: this.logging,
       namingStrategy: new SnakeNamingStrategy(),
       type: 'mysql',
       autoLoadEntities: true,
