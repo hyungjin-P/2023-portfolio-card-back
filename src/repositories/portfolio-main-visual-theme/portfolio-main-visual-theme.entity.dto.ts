@@ -34,7 +34,7 @@ export class PortfolioMainVisualThemeEntityDto extends PortfolioMainVisualTheme 
 
   @ApiProperty({
     description: '태그 타이틀 클래스',
-    default: 'angulate5',
+    default: 'angulate',
   })
   tagClass: string;
 }

@@ -1,6 +1,6 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
-/** @description 공통요소 베이스 */
+/** @description 엔티티 공통 베이스 */
 export class CommonEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
