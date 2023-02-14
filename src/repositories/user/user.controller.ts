@@ -12,11 +12,13 @@ import {
   ApiCreatedResponse,
   ApiOperation,
   ApiQuery,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from './user.entity';
 import { UserTempDto } from './dto/user-temp.dto';
 import { UserJoinDto } from './dto/user-join.dto';
+import { UserLoginDto } from './dto/user-login.dto';
 
 @Controller('user')
 @ApiTags('사용자')
@@ -52,11 +54,11 @@ export class UserController {
   @Patch('/joinUser')
   @ApiOperation({
     summary: '사용자 회원 가입 완료',
-    description: '사용자 추가',
+    description: '임시 주소 발급한 회원 대상으로 회원가입을 진행한다.',
   })
   @ApiCreatedResponse({
-    description: `사용자 추가`,
-    type: User,
+    description: `사용자 회원 가입 완료`,
+    type: UserJoinDto,
   })
   async joinUser(@Body() userJoinDto: UserJoinDto): Promise<User> {
     return await this.userService.joinUser(userJoinDto);
@@ -73,6 +75,19 @@ export class UserController {
   })
   async createTempUser(@Body() userTempDto: UserTempDto): Promise<User> {
     return await this.userService.createTempUser(userTempDto);
+  }
+
+  @Post('/loginUser')
+  @ApiOperation({
+    summary: '로그인',
+    description: '사용자 링크 (userLink), 비밀번호로 로그인',
+  })
+  @ApiCreatedResponse({
+    description: `return User\n\n 사용자를 리턴함.`,
+    type: User,
+  })
+  async loginUser(userLoginDto: UserLoginDto): Promise<User> {
+    return await this.userService.loginUser(userLoginDto);
   }
 
   @Patch('/modify')

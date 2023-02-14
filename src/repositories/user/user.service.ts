@@ -36,6 +36,22 @@ export class UserService {
   }
 
   async joinUser(userJoinDto: UserJoinDto): Promise<User> {
+    const joinUserCount: number = await this.userRepository.count({
+      where: {
+        isTemporaryUser: false,
+        userLink: userJoinDto.userLink,
+      },
+    });
+
+    if (joinUserCount > 0) {
+      throw new HttpException(
+        {
+          message: '이미 등록된 사용자가 존재합니다.',
+        },
+        200,
+      );
+    }
+
     const tempUser: User = await this.userRepository.findOne({
       where: { id: userJoinDto.id },
     });
