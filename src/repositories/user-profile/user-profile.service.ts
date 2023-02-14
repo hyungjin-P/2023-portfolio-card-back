@@ -26,7 +26,7 @@ export class UserProfileService {
 
   async modifyUserProfile(
     userProfile: UserProfile,
-  ): Promise<UserProfile | void> {
+  ): Promise<UserProfile> {
     const findUserProfile: UserProfile =
       await this.userProfileRepository.findOne({
         where: {
@@ -44,12 +44,14 @@ export class UserProfileService {
     return await this.userProfileRepository.save(userProfile);
   }
 
-  async removeUserProfile(userProfileId: string): Promise<UserProfile | void> {
-    await this.userProfileRepository.findOne({
+  async removeUserProfile(userProfileId: string): Promise<void> {
+    const userProfile: UserProfile = await this.userProfileRepository.findOne({
       where: {
         id: userProfileId,
       },
     });
+
+    await this.userProfileRepository.remove(userProfile);
   }
 
   async findAllUserProfileByUserId(userId: string): Promise<UserProfile[]> {

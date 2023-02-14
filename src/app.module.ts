@@ -11,6 +11,7 @@ import { PortfolioModule } from './repositories/portfolio/portfolio.module';
 import { PortfolioMainVisualModule } from './repositories/portfolio-main-visual/portfolio-main-visual.module';
 import { PortfolioMainVisualThemeModule } from './repositories/portfolio-main-visual-theme/portfolio-main-visual-theme.module';
 import { PortfolioMainVisualTagModule } from './repositories/portfolio-main-visual-tag/portfolio-main-visual-tag.module';
+import { UserProfileModule } from './repositories/user-profile/user-profile.module';
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -27,6 +28,7 @@ const stage =
       useClass: TypeOrmConfigService,
     }),
     UserModule,
+    UserProfileModule,
     PortfolioModule,
     PortfolioMainVisualModule,
     PortfolioMainVisualThemeModule,
