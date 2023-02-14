@@ -96,6 +96,16 @@ export class UserService {
     return loginUsers[0];
   }
 
+  async isDuplicateUserLink(userLink: string): Promise<boolean> {
+    const userCount: number = await this.userRepository.count({
+      where: {
+        userLink,
+      },
+    });
+
+    return userCount > 0;
+  }
+
   async createTempUser(userTempDto: UserTempDto): Promise<User> {
     const newUser: User = new User();
     newUser.provider = userTempDto.provider;

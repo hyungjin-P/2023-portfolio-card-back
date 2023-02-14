@@ -83,11 +83,24 @@ export class UserController {
     description: '사용자 링크 (userLink), 비밀번호로 로그인',
   })
   @ApiCreatedResponse({
-    description: `return User\n\n 사용자를 리턴함.`,
+    description: `결과 => User` + `\n\n 사용자를 리턴함.`,
     type: User,
   })
   async loginUser(userLoginDto: UserLoginDto): Promise<User> {
     return await this.userService.loginUser(userLoginDto);
+  }
+
+  @Get('/isDuplicateUserLink')
+  @ApiOperation({
+    summary: '사용자 url 중복체크',
+    description:
+      `사용자 url 중복 체크\n\n` +
+      `__true__ => _중복_, __false__ => _사용가능_`,
+  })
+  async isDuplicateUserLink(
+    @Query('userLink') userLink: string,
+  ): Promise<boolean> {
+    return await this.userService.isDuplicateUserLink(userLink);
   }
 
   @Patch('/modify')
