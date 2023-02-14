@@ -15,6 +15,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from './user.entity';
+import { UserTempDto } from './dto/user-temp.dto';
+import { UserJoinDto } from './dto/user-join.dto';
 
 @Controller('user')
 @ApiTags('사용자')
@@ -40,11 +42,37 @@ export class UserController {
     description: '사용자 추가',
   })
   @ApiCreatedResponse({
-    description: `사용자 추가, 임시 데이터`,
+    description: `사용자 추가`,
     type: User,
   })
   async createUser(): Promise<User> {
     return await this.userService.createUser();
+  }
+
+  @Patch('/joinUser')
+  @ApiOperation({
+    summary: '사용자 회원 가입 완료',
+    description: '사용자 추가',
+  })
+  @ApiCreatedResponse({
+    description: `사용자 추가`,
+    type: User,
+  })
+  async joinUser(@Body() userJoinDto: UserJoinDto): Promise<User> {
+    return await this.userService.joinUser(userJoinDto);
+  }
+
+  @Post('/createTempUser')
+  @ApiOperation({
+    summary: '사용자 임시 주소 만들기',
+    description: '회원 가입 중 도메인 뒤에 붙는 임시 주소 만들기',
+  })
+  @ApiCreatedResponse({
+    description: `사용자 추가, 임시 데이터`,
+    type: User,
+  })
+  async createTempUser(@Body() userTempDto: UserTempDto): Promise<User> {
+    return await this.userService.createTempUser(userTempDto);
   }
 
   @Patch('/modify')

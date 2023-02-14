@@ -26,6 +26,12 @@ export class User {
   isLock: boolean;
 
   @Column({ default: true })
+  isTemporaryUser: boolean;
+
+  @Column()
+  userLink: string;
+
+  @Column({ default: true })
   createdAt: Date;
 
   @Column({ default: true })
@@ -33,6 +39,9 @@ export class User {
 
   @Column()
   deletedAt: Date;
+
+  @Column({ default: true })
+  serviceTerm: boolean;
 
   @OneToMany(() => UserProfile, (userProfile) => userProfile.user)
   userProfiles: UserProfile[];
