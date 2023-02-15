@@ -24,9 +24,7 @@ export class UserProfileService {
     return savedUserProfile;
   }
 
-  async modifyUserProfile(
-    userProfile: UserProfile,
-  ): Promise<UserProfile> {
+  async modifyUserProfile(userProfile: UserProfile): Promise<UserProfile> {
     const findUserProfile: UserProfile =
       await this.userProfileRepository.findOne({
         where: {

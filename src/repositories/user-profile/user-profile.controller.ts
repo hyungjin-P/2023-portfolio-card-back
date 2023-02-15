@@ -1,15 +1,14 @@
 import {
   Body,
   Controller,
+  Delete,
+  Get,
   Patch,
   Post,
-  Get,
-  Delete,
   Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserProfileService } from './user-profile.service';
-import { User } from '../user/user.entity';
 import { UserProfile } from './user-profile.entity';
 import { UserProfileCreateDto } from './user-profile.create.dto';
 

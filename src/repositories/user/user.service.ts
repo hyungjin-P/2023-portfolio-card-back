@@ -106,6 +106,16 @@ export class UserService {
     return userCount > 0;
   }
 
+  async isDuplicateEmail(email: string): Promise<boolean> {
+    const emailCount: number = await this.userRepository.count({
+      where: {
+        email,
+      },
+    });
+
+    return emailCount > 0;
+  }
+
   async createTempUser(userTempDto: UserTempDto): Promise<User> {
     const newUser: User = new User();
     newUser.provider = userTempDto.provider;

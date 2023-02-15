@@ -103,6 +103,17 @@ export class UserController {
     return await this.userService.isDuplicateUserLink(userLink);
   }
 
+  @Get('/isDuplicateEmail')
+  @ApiOperation({
+    summary: '이메일 중복체크',
+    description:
+      `이메일 중복 체크\n\n` +
+      `__true__ => _중복_, __false__ => _사용가능_`,
+  })
+  async isDuplicateEmail(@Query('email') email: string): Promise<boolean> {
+    return await this.userService.isDuplicateEmail(email);
+  }
+
   @Patch('/modify')
   @ApiOperation({
     summary: '사용자 수정',
@@ -128,6 +139,4 @@ export class UserController {
   async deleteUser(@Query('userId') userId: string): Promise<void> {
     return await this.userService.deleteUser(userId);
   }
-
-
 }
