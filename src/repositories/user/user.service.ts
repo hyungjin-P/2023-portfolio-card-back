@@ -48,7 +48,7 @@ export class UserService {
         {
           message: '이미 등록된 사용자가 존재합니다.',
         },
-        200,
+        500,
       );
     }
 
@@ -61,7 +61,7 @@ export class UserService {
         {
           message: '회원가입을 진행중인 사용자가 없습니다.',
         },
-        200,
+        500,
       );
     }
 
@@ -89,7 +89,7 @@ export class UserService {
     if (loginUsers.length > 1) {
       throw new HttpException(
         { message: '해당되는 사용자가 너무 많습니다.' },
-        200,
+        500,
       );
     }
 

@@ -22,7 +22,7 @@ export class PortfolioMainVisualService {
     if (!portfolioMainVisualList) {
       throw new HttpException(
         { message: '포트폴리오 메인이 존재하지 않습니다. ' },
-        200,
+        500,
       );
     }
 
@@ -50,7 +50,7 @@ export class PortfolioMainVisualService {
     if (!portfolioMainVisualList) {
       throw new HttpException(
         { message: '포트폴리오 메인이 존재하지 않습니다. ' },
-        200,
+        500,
       );
     }
 
@@ -75,7 +75,7 @@ export class PortfolioMainVisualService {
     if (!savedPortfolioMainVisual) {
       throw new HttpException(
         { message: '포트폴리오 메인 비주얼이 존재하지 않습니다.' },
-        200,
+        500,
       );
     }
 
@@ -93,7 +93,7 @@ export class PortfolioMainVisualService {
     if (!portfolioMainVisual) {
       throw new HttpException(
         { message: '삭제할 포트폴리오가 존재하지 않습니다.' },
-        200,
+        500,
       );
     }
     await this.portfolioMainVisualRepository.remove(portfolioMainVisual);

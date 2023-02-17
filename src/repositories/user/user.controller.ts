@@ -51,7 +51,7 @@ export class UserController {
     return await this.userService.createUser();
   }
 
-  @Patch('/joinUser')
+  @Post('/joinUser')
   @ApiOperation({
     summary: '사용자 회원 가입 완료',
     description: '임시 주소 발급한 회원 대상으로 회원가입을 진행한다.',
@@ -107,8 +107,7 @@ export class UserController {
   @ApiOperation({
     summary: '이메일 중복체크',
     description:
-      `이메일 중복 체크\n\n` +
-      `__true__ => _중복_, __false__ => _사용가능_`,
+      `이메일 중복 체크\n\n` + `__true__ => _중복_, __false__ => _사용가능_`,
   })
   async isDuplicateEmail(@Query('email') email: string): Promise<boolean> {
     return await this.userService.isDuplicateEmail(email);

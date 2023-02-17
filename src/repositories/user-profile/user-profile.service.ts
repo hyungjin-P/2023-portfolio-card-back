@@ -35,7 +35,7 @@ export class UserProfileService {
     if (!findUserProfile) {
       throw new HttpException(
         { message: '수정할 사용자 프로필이 없습니다.' },
-        200,
+        500,
       );
     }
 

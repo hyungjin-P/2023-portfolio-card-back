@@ -27,7 +27,7 @@ export class PortfolioService {
     if (!portfolioList) {
       throw new HttpException(
         { message: '포트폴리오가 존재하지 않습니다.' },
-        200,
+        500,
       );
     }
 
@@ -42,7 +42,7 @@ export class PortfolioService {
     if (!newPortfolio) {
       throw new HttpException(
         { message: '포트폴리오 생성을 실패했습니다' },
-        200,
+        500,
       );
     }
 
@@ -57,7 +57,7 @@ export class PortfolioService {
     if (!modifiedPortfolio) {
       throw new HttpException(
         { message: '수정할 포트폴리오가 존재하지 않습니다.' },
-        200,
+        500,
       );
     }
 
@@ -74,7 +74,7 @@ export class PortfolioService {
     if (!targetPortfolio) {
       throw new HttpException(
         { message: '삭제할 포트폴리오가 존재하지 않습니다.' },
-        200,
+        500,
       );
     }
 
