@@ -86,7 +86,7 @@ export class UserController {
     description: `결과 => User` + `\n\n 사용자를 리턴함.`,
     type: User,
   })
-  async loginUser(userLoginDto: UserLoginDto): Promise<User> {
+  async loginUser(@Body() userLoginDto: UserLoginDto): Promise<User> {
     return await this.userService.loginUser(userLoginDto);
   }
 

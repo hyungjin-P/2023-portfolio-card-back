@@ -79,11 +79,12 @@ export class UserService {
       where: {
         userLink: userLoginDto.userLink,
         password: userLoginDto.password,
+        isTemporaryUser: false,
       },
     });
 
     if (loginUsers.length === 0) {
-      throw new HttpException({ message: '사용자가 없습니다.' }, 200);
+      throw new HttpException({ message: '사용자가 없습니다.' }, 500);
     }
 
     if (loginUsers.length > 1) {
