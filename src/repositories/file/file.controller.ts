@@ -3,11 +3,12 @@ import {
   Controller,
   Post,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileService } from './file.service';
-import { ApiOperation } from '@nestjs/swagger';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiConsumes, ApiOperation } from '@nestjs/swagger';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { FileSaveDto } from './file-save.dto';
 
 @Controller('file')
@@ -18,11 +19,25 @@ export class FileController {
   @ApiOperation({
     summary: '파일 업로드',
   })
-  @UseInterceptors(FileInterceptor('files'))
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FilesInterceptor('files'))
   async uploadFile(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFiles() file: Array<Express.Multer.File>,
     @Body() fileSaveDto: FileSaveDto,
   ): Promise<any> {
     return await this.fileService.fileSave(file, fileSaveDto);
+  }
+
+  @Post('/uploadFileOne')
+  @ApiOperation({
+    summary: '파일 업로드',
+  })
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFileOne(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() fileSaveDto: FileSaveDto,
+  ): Promise<any> {
+    return await this.fileService.fileSaveOne(file, fileSaveDto);
   }
 }
