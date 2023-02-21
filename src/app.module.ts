@@ -12,6 +12,7 @@ import { PortfolioMainVisualModule } from './repositories/portfolio-main-visual/
 import { PortfolioMainVisualThemeModule } from './repositories/portfolio-main-visual-theme/portfolio-main-visual-theme.module';
 import { PortfolioMainVisualTagModule } from './repositories/portfolio-main-visual-tag/portfolio-main-visual-tag.module';
 import { UserProfileModule } from './repositories/user-profile/user-profile.module';
+import { FileModule } from './repositories/file/file.module';
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -33,6 +34,7 @@ const stage =
     PortfolioMainVisualModule,
     PortfolioMainVisualThemeModule,
     PortfolioMainVisualTagModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
