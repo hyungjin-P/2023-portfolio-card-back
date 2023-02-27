@@ -17,4 +17,9 @@ export class AppController {
   getTest01(): any {
     return { message: 'test test ' };
   }
+
+  @Get('/test/ex2')
+  getTest02(): any {
+    return { message: 'test2 test2 ' };
+  }
 }
