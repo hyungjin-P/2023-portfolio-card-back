@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { ConfigService } from '@nestjs/config';
+import { join } from 'path';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -16,7 +17,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       type: 'mysql',
       autoLoadEntities: true,
       synchronize: false,
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       timezone: 'Z',
       port: this.configService.get('DATABASE_PORT'),
       database: this.configService.get('DATABASE_SCHEMA'),

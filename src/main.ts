@@ -8,6 +8,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 let runningPort = 3000;
 
+declare const module: any;
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -41,6 +43,12 @@ async function bootstrap() {
     app,
     SwaggerModule.createDocument(app, options),
   );
+
+  /* hot reload */
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 
   await app.listen(port);
 }
