@@ -12,4 +12,9 @@ export class AppController {
   getHello(): any {
     return { message: 'dev' };
   }
+
+  @Get('/test/ex1')
+  getTest01(): any {
+    return { message: 'test test ' };
+  }
 }
