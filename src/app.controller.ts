@@ -22,4 +22,9 @@ export class AppController {
   getTest02(): any {
     return { message: 'test2 test2 ' };
   }
+
+  @Get('/test/ex3')
+  getTest03(): any {
+    return { message: 'test3 test3 ' };
+  }
 }
