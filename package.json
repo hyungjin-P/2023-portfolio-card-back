@@ -14,7 +14,7 @@
     "build-prod": "npm install && cross-env NODE_ENV=production nest build",
     "build:webpack-dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
     "build:webpack-dev-hmr": "cross-env NODE_ENV=development nest build --webpack --webpackPath webpack-hmr.config.js --watch",
-    "pm2-start": "pm2 start dist/main.js --name crackit-server",
+    "pm2-start": "pm2 start -i 0 dist/main.js --name crackit-server",
     "pm2-reload": "pm2 reload crackit-server",
     "pm2-start-ecosystem": "pm2 start ecosystem.config.js --name crackit-server",
     "prebuild": "rimraf dist",
