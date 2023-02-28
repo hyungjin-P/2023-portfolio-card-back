@@ -10,7 +10,7 @@
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "build": "npm i --save && cross-env NODE_ENV=development nest build",
+    "build": "cross-env NODE_ENV=development nest build",
     "build-prod": "npm install && cross-env NODE_ENV=production nest build",
     "build:webpack-dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
     "build:webpack-dev-hmr": "cross-env NODE_ENV=development nest build --webpack --webpackPath webpack-hmr.config.js --watch",
