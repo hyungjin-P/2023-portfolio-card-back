@@ -10,7 +10,7 @@ import { PortfolioMainVisualTheme } from '../portfolio-main-visual-theme/portfol
   imports: [
     TypeOrmModule.forFeature([
       PortfolioMainVisual,
-      PortfolioMainVisual,
+      PortfolioMainVisualTag,
       PortfolioMainVisualTheme,
     ]),
   ],

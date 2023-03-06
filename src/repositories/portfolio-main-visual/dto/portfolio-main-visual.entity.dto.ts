@@ -1,4 +1,4 @@
-import { PortfolioMainVisual } from './portfolio-main-visual.entity';
+import { PortfolioMainVisual } from '../portfolio-main-visual.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PortfolioMainVisualEntityDto extends PortfolioMainVisual {

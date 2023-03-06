@@ -2,6 +2,8 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Portfolio } from './portfolio.entity';
 import { Repository } from 'typeorm';
+import { PortfolioCreateNewPortfolioDto } from './dto/portfolio.create.new.portfolio.dto';
+import { assignTwoLevelsDeep } from '@nestjs/swagger/dist/utils/assign-two-levels-deep';
 
 @Injectable()
 export class PortfolioService {
@@ -77,7 +79,34 @@ export class PortfolioService {
         500,
       );
     }
-
     await this.portfolioRepository.delete({ id: targetPortfolio.id });
+  }
+
+  async createNewPortfolio(
+    portfolioCreateNewPortfolioDto: PortfolioCreateNewPortfolioDto,
+  ): Promise<void | Portfolio> {
+    const recentPortfolios: Portfolio[] = await this.portfolioRepository.find({
+      where: {
+        userId: portfolioCreateNewPortfolioDto.userId,
+      },
+    });
+
+    if (recentPortfolios.length > 0) {
+      return recentPortfolios[0];
+    }
+
+    const portfolio: Portfolio = new Portfolio();
+    portfolio.userId = portfolioCreateNewPortfolioDto.userId;
+
+    const savedPortfolio = await this.portfolioRepository.save(portfolio);
+
+    if (!savedPortfolio) {
+      throw new HttpException(
+        { message: '포트폴리오 생성을 실패했습니다.' },
+        500,
+      );
+    }
+
+    return savedPortfolio;
   }
 }

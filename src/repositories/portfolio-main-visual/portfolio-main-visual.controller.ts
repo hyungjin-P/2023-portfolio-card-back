@@ -2,7 +2,8 @@ import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
 import { PortfolioMainVisualService } from './portfolio-main-visual.service';
 import { PortfolioMainVisual } from './portfolio-main-visual.entity';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { PortfolioMainVisualEntityDto } from './portfolio-main-visual.entity.dto';
+import { PortfolioMainVisualEntityDto } from './dto/portfolio-main-visual.entity.dto';
+import { PortfolioMainVisualSaveInItemDto } from './dto/portfolio-main-visual-save-in-item.dto';
 
 @Controller('portfolio-main-visual')
 @ApiTags('포트폴리오 메인 비주얼')
@@ -41,5 +42,17 @@ export class PortfolioMainVisualController {
     @Query('portfolioId') portfolioId: string,
   ): Promise<PortfolioMainVisual> {
     return await this.portfolioMainVisualService.findOne(portfolioId);
+  }
+
+  @Post('/saveAndInItem')
+  @ApiOperation({
+    summary: '포트폴리오 메인 비주얼, 태그, 테마 저장',
+  })
+  async savePortfolioMainVisualInItem(
+    @Body() portfolioMainVisualSaveInItemDto: PortfolioMainVisualSaveInItemDto,
+  ): Promise<PortfolioMainVisual> {
+    return await this.portfolioMainVisualService.saveMainVisualAndInItem(
+      portfolioMainVisualSaveInItemDto,
+    );
   }
 }
