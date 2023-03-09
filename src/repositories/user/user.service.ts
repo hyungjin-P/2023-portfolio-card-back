@@ -52,18 +52,7 @@ export class UserService {
       );
     }
 
-    const tempUser: User = await this.userRepository.findOne({
-      where: { id: userJoinDto.id },
-    });
-
-    if (!tempUser) {
-      throw new HttpException(
-        {
-          message: '회원가입을 진행중인 사용자가 없습니다.',
-        },
-        500,
-      );
-    }
+    const tempUser: User = new User();
 
     tempUser.userLink = userJoinDto.userLink;
     tempUser.password = userJoinDto.password;
