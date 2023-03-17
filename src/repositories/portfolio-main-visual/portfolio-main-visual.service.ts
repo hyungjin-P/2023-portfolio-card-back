@@ -58,7 +58,7 @@ export class PortfolioMainVisualService {
       );
     }
 
-    if (portfolioMainVisualList[0].portfolioMainVisualThemes.length > 0) {
+    if (portfolioMainVisualList[0]?.portfolioMainVisualThemes?.length > 0) {
       const firstPortfolioMainVisual =
         portfolioMainVisualList[0].portfolioMainVisualThemes[0];
 
