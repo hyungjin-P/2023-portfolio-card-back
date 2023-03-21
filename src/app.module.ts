@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './configs/type-orm-config.service';
 import { UserModule } from './repositories/user/user.module';
-import { DataSource } from 'typeorm';
 import { NowStage } from './enums/now.stage';
 import { PortfolioModule } from './repositories/portfolio/portfolio.module';
 import { PortfolioMainVisualModule } from './repositories/portfolio-main-visual/portfolio-main-visual.module';
@@ -45,6 +44,4 @@ const stage =
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}
