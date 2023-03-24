@@ -12,7 +12,7 @@ export class PortfolioArtWork extends CommonEntity {
   @Column()
   title: string;
 
-  /** 포트폴리오 설명*/
+  /** 포트폴리오 설명 */
   @Column()
   description: string;
 
