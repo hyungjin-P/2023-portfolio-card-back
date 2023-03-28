@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Portfolio } from './portfolio.entity';
 import { PortfolioMainVisual } from '../portfolio-main-visual/portfolio-main-visual.entity';
 import { PortfolioArtWork } from '../portfolio-art-work/portfolio-art-work.entity';
+import { PortfolioHistory } from '../portfolio-history/portfolio-history.entity';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { PortfolioArtWork } from '../portfolio-art-work/portfolio-art-work.entit
       Portfolio,
       PortfolioMainVisual,
       PortfolioArtWork,
+      PortfolioHistory,
     ]),
   ],
   providers: [PortfolioService],
