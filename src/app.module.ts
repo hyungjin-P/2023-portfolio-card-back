@@ -19,6 +19,15 @@ import { PortfolioHistoryModule } from './repositories/portfolio-history/portfol
 import { PortfolioHistoryAwardModule } from './repositories/portfolio-history-award/portfolio-history-award.module';
 import { PortfolioHistoryAwardYearModule } from './repositories/portfolio-history-award-year/portfolio-history-award-year.module';
 import { PortfolioHistoryAwardYearContentModule } from './repositories/portfolio-history-award-year-content/portfolio-history-award-year-content.module';
+import {
+  PortfolioHistoryExhibitionModule
+} from './repositories/portfolio-history-exhibition/portfolio-history-exhibition.module';
+import {
+  PortfolioHistoryExhibitionYearModule
+} from './repositories/portfolio-history-exhibition-year/portfolio-history-exhibition-year.module';
+import {
+  PortfolioHistoryExhibitionYearContentModule
+} from './repositories/portfolio-history-exhibition-year-content/portfolio-history-exhibition-year-content.module';
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -47,7 +56,9 @@ const stage =
     PortfolioHistoryAwardModule,
     PortfolioHistoryAwardYearModule,
     PortfolioHistoryAwardYearContentModule,
-
+    PortfolioHistoryExhibitionModule,
+    PortfolioHistoryExhibitionYearModule,
+    PortfolioHistoryExhibitionYearContentModule,
     FileModule,
   ],
   controllers: [AppController],

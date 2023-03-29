@@ -7,7 +7,5 @@ import { ApiTags } from '@nestjs/swagger';
 export class PortfolioArtWorkBlockController {
   constructor(
     private portfolioArtWorkBlockService: PortfolioArtWorkBlockService,
-  ) {
-  }
-
+  ) {}
 }

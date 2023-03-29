@@ -1,8 +1,11 @@
 import { CommonEntity } from '../common/common.entity';
-import { Entity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
-@Entity('portfolio_History_award_year_content')
+@Entity('portfolio_history_award_year_content')
 export class PortfolioHistoryAwardYearContent extends CommonEntity {
-
+  @Column()
   portfolioHistoryAwardYear: string;
+
+  @Column()
+  content: string;
 }
