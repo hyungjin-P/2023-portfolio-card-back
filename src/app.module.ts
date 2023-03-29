@@ -15,6 +15,10 @@ import { FileModule } from './repositories/file/file.module';
 import { PortfolioArtWorkModule } from './repositories/portfolio-art-work/portfolio-art-work.module';
 import { PortfolioArtWorkBlockModule } from './repositories/portfolio-art-work-block/portfolio-art-work-block.module';
 import { PortfolioArtWorkPictureModule } from './repositories/portfolio-art-work-picture/portfolio-art-work-picture.module';
+import { PortfolioHistoryModule } from './repositories/portfolio-history/portfolio-history.module';
+import { PortfolioHistoryAwardModule } from './repositories/portfolio-history-award/portfolio-history-award.module';
+import { PortfolioHistoryAwardYearModule } from './repositories/portfolio-history-award-year/portfolio-history-award-year.module';
+import { PortfolioHistoryAwardYearContentModule } from './repositories/portfolio-history-award-year-content/portfolio-history-award-year-content.module';
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -39,6 +43,11 @@ const stage =
     PortfolioArtWorkModule,
     PortfolioArtWorkBlockModule,
     PortfolioArtWorkPictureModule,
+    PortfolioHistoryModule,
+    PortfolioHistoryAwardModule,
+    PortfolioHistoryAwardYearModule,
+    PortfolioHistoryAwardYearContentModule,
+
     FileModule,
   ],
   controllers: [AppController],
