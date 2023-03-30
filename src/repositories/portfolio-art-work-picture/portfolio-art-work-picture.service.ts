@@ -9,4 +9,7 @@ export class PortfolioArtWorkPictureService {
     @InjectRepository(PortfolioArtWorkPicture)
     private portfolioArtWorkPicture: Repository<PortfolioArtWorkPicture>,
   ) {}
+
+
+
 }
