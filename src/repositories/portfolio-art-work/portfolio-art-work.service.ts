@@ -49,6 +49,9 @@ export class PortfolioArtWorkService {
         where: {
           portfolioId: recentPortfolio.id,
         },
+        relations: {
+          portfolioArtWorkBlocks: true,
+        },
         order: {
           updatedAt: 'DESC',
         },
@@ -57,8 +60,17 @@ export class PortfolioArtWorkService {
     let resultPortfolioArtWork: PortfolioArtWork;
 
     if (portfolioArtWorks.length === 0) {
-      resultPortfolioArtWork = await this.portfolioArtWorkRepository.save({
+      const savedPortfolioArtWork = await this.portfolioArtWorkRepository.save({
         portfolioId: recentPortfolio.id,
+      });
+
+      resultPortfolioArtWork = await this.portfolioArtWorkRepository.findOne({
+        where: {
+          id: savedPortfolioArtWork.id,
+        },
+        relations: {
+          portfolioArtWorkBlocks: true,
+        },
       });
     } else {
       resultPortfolioArtWork = portfolioArtWorks[0];

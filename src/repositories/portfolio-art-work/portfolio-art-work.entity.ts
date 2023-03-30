@@ -1,6 +1,7 @@
 import { CommonEntity } from '../common/common.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Portfolio } from '../portfolio/portfolio.entity';
+import { PortfolioArtWorkBlock } from '../portfolio-art-work-block/portfolio-art-work-block.entity';
 
 @Entity('portfolio_art_work')
 export class PortfolioArtWork extends CommonEntity {
@@ -21,6 +22,6 @@ export class PortfolioArtWork extends CommonEntity {
   portfolio: Portfolio;
 
   /** 포트폴리오 작품 */
-  @OneToMany(() => PortfolioArtWork, (entity) => entity.portfolio)
-  portfolioArtWorks: PortfolioArtWork[];
+  @OneToMany(() => PortfolioArtWorkBlock, (entity) => entity.portfolioArtWork)
+  portfolioArtWorkBlocks: PortfolioArtWorkBlock[];
 }
