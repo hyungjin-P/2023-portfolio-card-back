@@ -1,0 +1,295 @@
+
+############### UML Data (Figma) ###############
+
+## 양식
+Table 양식 {
+  , , , ;
+}
+
+
+## 유저 정보
+Table User :: 사용자 {
+  id, string, , pk;
+  provider, string, , ;
+  provider_id, string, , ;
+  name, string, , ;
+  password, string, , ;
+  email, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+  is_lock, boolean, , ;
+}
+
+
+## 유저 프로필
+Table UserProfile :: 사용자 노출 정보 {
+  id, string, ,pk;
+  user_id, string , ,fk;
+  avatar_image_url, string , , ;
+  nick_name, string, , ;
+  phone_number, string, , ;
+  email, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 파일
+Table File {
+  id, string, , PK;
+  user_id, string, , ;
+  url, string, , ;
+  original_name, string, , ;
+  encoding, string, , ;
+  mimetype, string, , ;
+  size, number, , ;
+  bucket, string, , ;
+  key, string, , ;
+  acl, string, , ;
+  location, string, , ;
+  etag, string, , ;
+  created_at, Date, , ;
+}
+
+
+## 포트폴리오
+Table Portfolio {
+  id, string, , PK;
+  user_id, string, , fk;
+  title, string , , ;
+  description, , ,;
+  created_at, string, , ;
+  updated_at, string, , ;
+  deleted_at, string, , ;
+}
+
+
+## 포트폴리오 메인 비주얼
+Table PortfolioMainVisual :: 포트폴리오 메인 비주얼 {
+  id, string, , pk;
+  portfolio_id, string, , ;
+  main_visual_url, string, , ;
+  name, string, , ;
+  nick_name, string, , ;
+  sub_title, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 포트폴리오 메인 비주얼 테마
+Table PortfolioMainVisualTheme :: 메인 비주얼 테마 {
+  id, string, ,pk;
+  portfolio_main_visual_id, string, , ;
+  controller_class, string, , ;
+  share_button_class, string, , ;
+  title_class, string, , ;
+  sub_title_class, string, , ;
+  tag_class, string, , ;
+}
+
+
+## 포트폴리오 메인 비주얼 태그
+Table PortfolioMainVisualTag :: 메인 비주얼 태그 {
+  id, string, ,pk ;
+  portfolio_main_visual_id, string, , ;
+  content, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+}
+
+
+## 포트폴리오 작품
+Table PortfolioArtWork :: 포트폴리오 작품 {
+  id, string, , pk;
+  portfolio_id, string, , ;
+  title, string, , ;
+  description, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 포트폴리오 작품 블록
+Table PortfolioArtWorkBlock :: 포트폴리오 작품 블록 {
+  id, string, , pk;
+  portfolio_art_work_id, string, , fk;
+  block_type, string, , ;
+  sort_number, number, , ;
+  title, string, , ;
+  description, string, , ;
+  visibility, boolean, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 포트폴리오 작품 > 블록 타입 = image > 작품 사진
+Table PortfolioArtWorkBlockPicture ::  포트폴리오 작품 블록 이미지 {
+  id, string, , pk;
+  portfolio_art_work_block_id, string, , fk;
+  url, string, , ;
+  sort_number, number, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력
+Table PortfolioHistory :: 작가이력 {
+  id, string, , pk;
+  portfolio_id, string, ,fk;
+  title, string, ,;
+  description, string, ,;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 기본정보
+Table PortfolioHistoryGeneral  :: 작가이력 > 기본정보 {
+  id, string, , pk;
+  portfolio_history_id, string, ,fk;
+  profile_image_url, string, ,;
+  name, string, ,;
+  tel_number, string, ,;
+  email, string, ,;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 학력정보
+Table PortfolioHistoryEducation  :: 작가이력 > 학력정보 {
+  id, string, , pk;
+  portfolio_history_id, string, ,fk;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 기본정보 > 학력내용
+Table PortfolioHistoryEducationYear  :: 작가이력 > 학력정보 > 연도 {
+  id, string, , pk;
+  portfolio_history_education_id, string, ,fk;
+  period, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 학력정보 > 연도별 내용
+Table PortfolioHistoryEducationYearContent  :: 작가이력 > 학력정보 > 연도 > 연도별 내용 {
+  id, string, , pk;
+  portfolio_history_education_year_id, string, ,fk;
+  content, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+## 작가이력 > 전시이력
+Table PortfolioHistoryExhibition  :: 작가이력 > 전시이력 {
+  id, string, , pk;
+  portfolio_history_id, string, ,fk;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 전시이력 > 연도
+Table PortfolioHistoryExhibitionYear  :: 작가이력 > 전시이력 > 연도 {
+  id, string, , pk;
+  portfolio_history_exhibition_id, string, ,fk;
+  period, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 전시이력 > 연도 > 연도별 내용
+Table PortfolioHistoryExhibitionYearContent  :: 작가이력 > 전시이력 > 연도 > 연도별 내용 {
+  id, string, , pk;
+  portfolio_history_exhibition_year_id, string, ,fk;
+  content, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 수상내역
+Table PortfolioHistoryAward  :: 작가이력 > 수상내역 {
+  id, string, , pk;
+  portfolio_history_id, string, ,fk;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 수상내역 > 연도
+Table PortfolioHistoryExhibitionYear  :: 작가이력 > 수상내역 > 연도 {
+  id, string, , pk;
+  portfolio_history_exhibition_id, string, ,fk;
+  period, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 수상내역 > 수상내용 > 연도 > 연도별 내용
+Table PortfolioHistoryExhibitionYearContent  :: 작가이력 > 수상내역 > 연도 > 연도별 내용 {
+  id, string, , pk;
+  portfolio_history_exhibition_year_id, string, ,fk;
+  content, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > 기타이력
+Table PortfolioHistoryEtc  :: 기타이력 > 기타이력 {
+  id, string, , pk;
+  portfolio_history_id, string, ,fk;
+  content_title, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+## 작가이력 > 수상내역 > 수상내용
+Table PortfolioHistoryEtcItem  :: 기타이력 > 기타이력 > 기타이력내용 {
+  id, string, , pk;
+  portfolio_history_etc_id, string, ,fk;
+  period, Date, , ;
+  content, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
+
+
+## 작가이력 > SNS Links
+Table PortfolioHistorySnsLink  :: 작가이력 > SNS Links {
+  id, string, , pk;
+  portfolio_history_id, string, ,fk;
+  sns_url, string, , ;
+  created_at, Date, , ;
+  updated_at, Date, , ;
+  deleted_at, Date, , ;
+}
