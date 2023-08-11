@@ -3,10 +3,9 @@
 ##############################################
 
 ### 사용자
-create table `crackit-portfolio`.user
+create table `crackit_portfolio`.user
 (
-    id          varchar(50)                          not null comment 'id'
-        primary key,
+    id          varchar(50)                          not null comment 'id' primary key,
     provider    varchar(255)                         null,
     provider_id varchar(255)                         null,
     name        varchar(50)                          null,
@@ -20,7 +19,7 @@ create table `crackit-portfolio`.user
 
 
 ### 작가 포트폴리오
-create table `crackit-portfolio`.portfolio
+create table `crackit_portfolio`.portfolio
 (
     id          varchar(50)                        not null comment '아이디#UUID' primary key,
     user_id     varchar(50)                        not null comment '사용자 아이디',
@@ -29,12 +28,12 @@ create table `crackit-portfolio`.portfolio
     created_at  datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at  datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at  datetime                           null comment '삭제일시',
-    constraint FK_portfolio_art_work_user foreign key (user_id) references `crackit-portfolio`.user (id)
+    constraint FK_portfolio_art_work_user foreign key (user_id) references `crackit_portfolio`.user (id)
 ) comment '작가 포트폴리오';
 
 
 ### 작가 포트폴리오 > 메인 비주얼
-create table `crackit-portfolio`.portfolio_main_visual
+create table `crackit_portfolio`.portfolio_main_visual
 (
     id              varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_id    varchar(50)                        not null comment '사용자 아이디',
@@ -45,12 +44,12 @@ create table `crackit-portfolio`.portfolio_main_visual
     created_at      datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at      datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at      datetime                           null comment '삭제일시',
-    constraint FK_portfolio_id foreign key (portfolio_id) references `crackit-portfolio`.portfolio (id)
+    constraint FK_portfolio_id foreign key (portfolio_id) references `crackit_portfolio`.portfolio (id)
 ) comment '작가 메인 비주얼';
 
 
 ### 메인 비주얼 테마
-create table `crackit-portfolio`.portfolio_main_visual_theme
+create table `crackit_portfolio`.portfolio_main_visual_theme
 (
     id                       varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_main_visual_id varchar(50)                        not null comment '메인 비주얼 ID',
@@ -62,12 +61,12 @@ create table `crackit-portfolio`.portfolio_main_visual_theme
     created_at               datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at               datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at               datetime                           null comment '삭제일시',
-    constraint FK_portfolio_main_visual_theme_main_visual_id foreign key (portfolio_main_visual_id) references `crackit-portfolio`.portfolio_main_visual (id)
+    constraint FK_portfolio_main_visual_theme_main_visual_id foreign key (portfolio_main_visual_id) references `crackit_portfolio`.portfolio_main_visual (id)
 ) comment '포트폴리오 메인 비주얼 테마';
 
 
 ### 메인 비주얼 태그
-create table `crackit-portfolio`.portfolio_main_visual_tag
+create table `crackit_portfolio`.portfolio_main_visual_tag
 (
     id             varchar(50)                        not null comment '아이디#UUID' primary key,
     main_visual_id varchar(50)                        not null comment '사용자 아이디',
@@ -75,12 +74,12 @@ create table `crackit-portfolio`.portfolio_main_visual_tag
     created_at     datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at     datetime                           null comment '삭제일시',
-    constraint FK_main_visual_id foreign key (main_visual_id) references `crackit-portfolio`.portfolio_main_visual (id)
+    constraint FK_main_visual_id foreign key (main_visual_id) references `crackit_portfolio`.portfolio_main_visual (id)
 ) comment '작가 포트폴리오 메인 비주얼 태그';
 
 
 ### 포트폴리오 작품
-create table `crackit-portfolio`.portfolio_main_visual_tag
+create table `crackit_portfolio`.portfolio_main_visual_tag
 (
     id             varchar(50)                        not null comment '아이디#UUID' primary key,
     main_visual_id varchar(50)                        not null comment '사용자 아이디',
@@ -88,12 +87,12 @@ create table `crackit-portfolio`.portfolio_main_visual_tag
     created_at     datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at     datetime                           null comment '삭제일시',
-    constraint FK_main_visual_id foreign key (main_visual_id) references `crackit-portfolio`.portfolio_main_visual (id)
+    constraint FK_main_visual_id foreign key (main_visual_id) references `crackit_portfolio`.portfolio_main_visual (id)
 ) comment '작가 포트폴리오 메인 비주얼 태그';
 
 
 ### 포트폴리오 작품
-create table `crackit-portfolio`.portfolio_art_work
+create table `crackit_portfolio`.portfolio_art_work
 (
     id           varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_id varchar(50)                        not null comment '포트폴리오 아이디',
@@ -102,12 +101,12 @@ create table `crackit-portfolio`.portfolio_art_work
     created_at   datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at   datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at   datetime                           null comment '삭제일시',
-    constraint FK_portfolio_art_work_portfolio_id foreign key (portfolio_id) references `crackit-portfolio`.portfolio (id)
+    constraint FK_portfolio_art_work_portfolio_id foreign key (portfolio_id) references `crackit_portfolio`.portfolio (id)
 ) comment '작가 포트폴리오 작품 블록';
 
 
 ### 포트폴리오 작품 블록
-create table `crackit-portfolio`.portfolio_art_work_block
+create table `crackit_portfolio`.portfolio_art_work_block
 (
     id                    varchar(50) auto_increment            not null comment '아이디#UUID' primary key,
     portfolio_art_work_id varchar(50)                           not null comment '포트폴리오 작품 아이디',
@@ -119,12 +118,12 @@ create table `crackit-portfolio`.portfolio_art_work_block
     created_at            datetime    default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at            datetime    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at            datetime                              null comment '삭제일시',
-    constraint FK_portfolio_art_work_block_portfolio_art_work_id foreign key (portfolio_art_work_id) references `crackit-portfolio`.portfolio_art_work (id)
+    constraint FK_portfolio_art_work_block_portfolio_art_work_id foreign key (portfolio_art_work_id) references `crackit_portfolio`.portfolio_art_work (id)
 ) comment '작가 포트폴리오 작품 블록';
 
 
 ### 포트폴리오 작품 블록 사진
-create table `crackit-portfolio`.portfolio_art_work_block_picture
+create table `crackit_portfolio`.portfolio_art_work_block_picture
 (
     id                          varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_art_work_block_id varchar(50)                        not null comment '포트폴리오 작품 블록 아이디',
@@ -133,12 +132,12 @@ create table `crackit-portfolio`.portfolio_art_work_block_picture
     created_at                  datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                  datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                  datetime comment '삭제일시',
-    constraint FK_portfolio_art_work_block_picture_portfolio_art_work_block_id foreign key (portfolio_art_work_block_id) references `crackit-portfolio`.portfolio_art_work_block (id)
+    constraint FK_portfolio_art_work_block_picture_portfolio_art_work_block_id foreign key (portfolio_art_work_block_id) references `crackit_portfolio`.portfolio_art_work_block (id)
 ) comment '작가 포트폴리오 작품 블록 사진';
 
 
 ## 파일
-create table `crackit-portfolio`.file
+create table `crackit_portfolio`.file
 (
     id            varchar(50)                        not null comment '아이디#UUID' primary key,
     user_id       varchar(50)                        not null comment '사용자 아이디',
@@ -154,19 +153,19 @@ create table `crackit-portfolio`.file
     etag          varchar(50)                        null comment 'The etagof the uploaded file in S3',
     versionId     varchar(50)                        null comment 'The versionId is an optional param returned by S3 for versioned buckets.',
     created_at    datetime default CURRENT_TIMESTAMP not null comment '생성일시',
-    constraint FK_file_user_id foreign key (user_id) references `crackit-portfolio`.user (id)
+    constraint FK_file_user_id foreign key (user_id) references `crackit_portfolio`.user (id)
 ) comment '파일';
 
-create index url on `crackit-portfolio`.file (url);
-create index id on `crackit-portfolio`.file (id);
-create index user_id on `crackit-portfolio`.file (user_id);
+create index url on `crackit_portfolio`.file (url);
+create index id on `crackit_portfolio`.file (id);
+create index user_id on `crackit_portfolio`.file (user_id);
 
 select *
 from file;
 
 
 ### 포트폴리오 사용자 노출 정보
-create table `crackit-portfolio`.user_profile
+create table `crackit_portfolio`.user_profile
 (
     id                varchar(50)                        not null comment '아이디#UUID' primary key,
     user_id           varchar(50)                        not null comment '사용자 id',
@@ -177,12 +176,12 @@ create table `crackit-portfolio`.user_profile
     created_at        datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at        datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at        datetime comment '삭제일시',
-    constraint FK_user_profile_user_id foreign key (user_id) references `crackit-portfolio`.user (id)
+    constraint FK_user_profile_user_id foreign key (user_id) references `crackit_portfolio`.user (id)
 ) comment '사용자 프로필 (포트폴리오 노출 정보)';
 
 
 ### 포트폴리오 작가이력
-create table `crackit-portfolio`.portfolio_history
+create table `crackit_portfolio`.portfolio_history
 (
     id           varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_id varchar(50)                        not null comment '포트폴리오 아이디',
@@ -192,12 +191,12 @@ create table `crackit-portfolio`.portfolio_history
     updated_at   datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at   datetime                           null comment '삭제일시',
     constraint FK_portfolio_history_portfolio_id
-        foreign key (portfolio_id) references `crackit-portfolio`.portfolio (id)
+        foreign key (portfolio_id) references `crackit_portfolio`.portfolio (id)
 ) comment '포트폴리오 작가 이력';
 
 
 ### 포트폴리오 작가이력 > 기본 정보
-create table `crackit-portfolio`.portfolio_history_general
+create table `crackit_portfolio`.portfolio_history_general
 (
     id                             varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_portfolio_history_id varchar(50)                        not null comment '포트폴리오 아이디',
@@ -207,12 +206,12 @@ create table `crackit-portfolio`.portfolio_history_general
     created_at                     datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                     datetime                           null comment '삭제일시',
-    constraint FK_portfolio_history_general_portfolio_history_id foreign key (portfolio_portfolio_history_id) references `crackit-portfolio`.portfolio_history (id)
+    constraint FK_portfolio_history_general_portfolio_history_id foreign key (portfolio_portfolio_history_id) references `crackit_portfolio`.portfolio_history (id)
 ) comment '포트폴리오 작가 이력';
 
 
 ### 포트폴리오 작가이력 > 전시이력
-create table `crackit-portfolio`.portfolio_history_exhibition
+create table `crackit_portfolio`.portfolio_history_exhibition
 (
     id                             varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_portfolio_history_id varchar(50)                        not null comment '포트폴리오 아이디',
@@ -220,12 +219,12 @@ create table `crackit-portfolio`.portfolio_history_exhibition
     created_at                     datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                     datetime                           null comment '삭제일시',
-    constraint FK_portfolio_history_exhibition_portfolio_history_id foreign key (portfolio_portfolio_history_id) references `crackit-portfolio`.portfolio_history (id)
+    constraint FK_portfolio_history_exhibition_portfolio_history_id foreign key (portfolio_portfolio_history_id) references `crackit_portfolio`.portfolio_history (id)
 ) comment '포트폴리오 전시 이력';
 
 
 ### 포트폴리오 작가이력 > 전시이력 > 연도
-create table `crackit-portfolio`.portfolio_history_exhibition_year
+create table `crackit_portfolio`.portfolio_history_exhibition_year
 (
     id                              varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_exhibition_id varchar(50)                        not null comment '포트폴리오 아이디',
@@ -233,11 +232,11 @@ create table `crackit-portfolio`.portfolio_history_exhibition_year
     created_at                      datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                      datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                      datetime                           null comment '삭제일시',
-    constraint FK_exhibition_year_portfolio_history_exhibition_id foreign key (portfolio_history_exhibition_id) references `crackit-portfolio`.portfolio_history_exhibition (id)
+    constraint FK_exhibition_year_portfolio_history_exhibition_id foreign key (portfolio_history_exhibition_id) references `crackit_portfolio`.portfolio_history_exhibition (id)
 ) comment '포트폴리오 전시 이력 > 연도';
 
 ### 포트폴리오 작가이력 > 전시이력 > 연도 > 연도별 내용
-create table `crackit-portfolio`.portfolio_history_exhibition_year_content
+create table `crackit_portfolio`.portfolio_history_exhibition_year_content
 (
     id                                   varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_exhibition_year_id varchar(50)                        not null comment '포트폴리오 아이디',
@@ -245,24 +244,24 @@ create table `crackit-portfolio`.portfolio_history_exhibition_year_content
     created_at                           datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                           datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                           datetime                           null comment '삭제일시',
-    constraint FK_exhibition_year_content_exhibition_year_id foreign key (portfolio_history_exhibition_year_id) references `crackit-portfolio`.portfolio_history_exhibition_year (id)
+    constraint FK_exhibition_year_content_exhibition_year_id foreign key (portfolio_history_exhibition_year_id) references `crackit_portfolio`.portfolio_history_exhibition_year (id)
 ) comment '포트폴리오 전시 이력 > 연도 > 연도별 내용';
 
 
 ### 포트폴리오 작가이력 > 학력정보
-create table `crackit-portfolio`.portfolio_history_education
+create table `crackit_portfolio`.portfolio_history_education
 (
     id                   varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_id varchar(50)                        not null comment '작가이력 포트폴리오 아이디',
     created_at           datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at           datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at           datetime                           null comment '삭제일시',
-    constraint FK_history_education_history_id foreign key (portfolio_history_id) references `crackit-portfolio`.portfolio_history (id)
+    constraint FK_history_education_history_id foreign key (portfolio_history_id) references `crackit_portfolio`.portfolio_history (id)
 ) comment '작가 이력 > 학력 정보';
 
 
 ### 포트폴리오 작가이력 > 학력정보 > 연도
-create table `crackit-portfolio`.portfolio_history_education_year
+create table `crackit_portfolio`.portfolio_history_education_year
 (
     id                             varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_education_id varchar(50)                        not null comment '작가이력 포트폴리오 아이디',
@@ -270,10 +269,10 @@ create table `crackit-portfolio`.portfolio_history_education_year
     created_at                     datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                     datetime                           null comment '삭제일시',
-    constraint FK_history_education_year_education_id foreign key (portfolio_history_education_id) references `crackit-portfolio`.portfolio_history_education (id)
+    constraint FK_history_education_year_education_id foreign key (portfolio_history_education_id) references `crackit_portfolio`.portfolio_history_education (id)
 ) comment '작가 이력 > 학력 정보 > 연도';
 
-create table `crackit-portfolio`.portfolio_history_education_year_content
+create table `crackit_portfolio`.portfolio_history_education_year_content
 (
     id                                  varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_education_year_id varchar(50)                        not null comment '작가이력 포트폴리오 연도 아이디',
@@ -281,24 +280,24 @@ create table `crackit-portfolio`.portfolio_history_education_year_content
     created_at                          datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                          datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                          datetime                           null comment '삭제일시',
-    constraint FK_history_education_year_content_education_year_id foreign key (portfolio_history_education_year_id) references `crackit-portfolio`.portfolio_history_education_year (id)
+    constraint FK_history_education_year_content_education_year_id foreign key (portfolio_history_education_year_id) references `crackit_portfolio`.portfolio_history_education_year (id)
 ) comment '작가 이력 > 학력 정보 > 연도별 내용';
 
 
 ### 포트폴리오 작가이력 > 수상내역
-create table `crackit-portfolio`.portfolio_history_award
+create table `crackit_portfolio`.portfolio_history_award
 (
     id                   varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_id varchar(50)                        not null comment '작가이력 포트폴리오 아이디',
     created_at           datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at           datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at           datetime                           null comment '삭제일시',
-    constraint FK_history_award_history_id foreign key (portfolio_history_id) references `crackit-portfolio`.portfolio_history (id)
-) comment '작가 이력 > 학력 정보';
+    constraint FK_history_award_history_id foreign key (portfolio_history_id) references `crackit_portfolio`.portfolio_history (id)
+) comment '작가 이력 > 수상 내역';
 
 
 ### 포트폴리오 작가이력 > 수상내역 > 연도
-create table `crackit-portfolio`.portfolio_history_award_year
+create table `crackit_portfolio`.portfolio_history_award_year
 (
     id                         varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_award_id varchar(50)                        not null comment '작가이력 포트폴리오 아이디',
@@ -306,10 +305,10 @@ create table `crackit-portfolio`.portfolio_history_award_year
     created_at                 datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                 datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                 datetime                           null comment '삭제일시',
-    constraint FK_history_award_year_award_id foreign key (portfolio_history_award_id) references `crackit-portfolio`.portfolio_history_award (id)
+    constraint FK_history_award_year_award_id foreign key (portfolio_history_award_id) references `crackit_portfolio`.portfolio_history_award (id)
 ) comment '작가 이력 > 수상내역 > 연도';
 
-create table `crackit-portfolio`.portfolio_history_award_year_content
+create table `crackit_portfolio`.portfolio_history_award_year_content
 (
     id                              varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_award_year_id varchar(50)                        not null comment '작가이력 포트폴리오 연도 아이디',
@@ -317,12 +316,12 @@ create table `crackit-portfolio`.portfolio_history_award_year_content
     created_at                      datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at                      datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at                      datetime                           null comment '삭제일시',
-    constraint FK_history_award_year_content_award_year_id foreign key (portfolio_history_award_year_id) references `crackit-portfolio`.portfolio_history_award_year (id)
+    constraint FK_history_award_year_content_award_year_id foreign key (portfolio_history_award_year_id) references `crackit_portfolio`.portfolio_history_award_year (id)
 ) comment '작가 이력 > 수상내역 > 연도별 내용';
 
 
 ### 포트폴리오 기타이력
-create table `crackit-portfolio`.portfolio_history_etc
+create table `crackit_portfolio`.portfolio_history_etc
 (
     id                   varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_id varchar(50)                        not null comment '작가이력 포트폴리오 아이디',
@@ -330,11 +329,11 @@ create table `crackit-portfolio`.portfolio_history_etc
     created_at           datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at           datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at           datetime                           null comment '삭제일시',
-    constraint FK_history_etc_history_id foreign key (portfolio_history_id) references `crackit-portfolio`.portfolio_history (id)
+    constraint FK_history_etc_history_id foreign key (portfolio_history_id) references `crackit_portfolio`.portfolio_history (id)
 ) comment '작가 이력 > 기타이력';
 
 ### 포트폴리오 > 기타이력 > 내용
-create table `crackit-portfolio`.portfolio_history_etc_item
+create table `crackit_portfolio`.portfolio_history_etc_item
 (
     id                   varchar(50)                        not null comment '아이디#UUID' primary key,
     portfolio_history_etc_id varchar(50)                        not null comment '작가이력 > 기타이력 아이디',
@@ -343,7 +342,7 @@ create table `crackit-portfolio`.portfolio_history_etc_item
     created_at           datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at           datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at           datetime                           null comment '삭제일시',
-    constraint FK_history_etc_item_history_etc_id foreign key (portfolio_history_etc_id) references `crackit-portfolio`.portfolio_history_etc (id)
+    constraint FK_history_etc_item_history_etc_id foreign key (portfolio_history_etc_id) references `crackit_portfolio`.portfolio_history_etc (id)
 ) comment '작가 이력 > 기타이력 > 기타이력 내용';
 
 

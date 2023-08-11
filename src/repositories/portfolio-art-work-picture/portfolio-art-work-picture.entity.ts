@@ -10,7 +10,7 @@ export class PortfolioArtWorkPicture extends CommonEntity {
   @Column()
   url: string;
 
-  @Column()
+  @Column({default: 0})
   sortNumber: number;
 
   @ManyToOne(

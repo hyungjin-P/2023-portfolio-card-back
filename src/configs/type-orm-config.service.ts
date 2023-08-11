@@ -12,18 +12,17 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      logging: this.logging,
       namingStrategy: new SnakeNamingStrategy(),
-      type: 'mysql',
+      type: 'postgres',
       autoLoadEntities: true,
-      synchronize: false,
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-      timezone: 'Z',
-      port: this.configService.get('DATABASE_PORT'),
+      host: this.configService.get('DATABASE_HOST'),
+      port: Number(this.configService.get('DATABASE_PORT')),
       database: this.configService.get('DATABASE_SCHEMA'),
       username: this.configService.get('DATABASE_USERNAME'),
       password: this.configService.get('DATABASE_PASSWORD'),
-      host: this.configService.get('DATABASE_HOST'),
+      synchronize: this.configService.get('DATABASE_SYNCHRONIZE'),
+      logging: this.logging,
     };
   }
 }

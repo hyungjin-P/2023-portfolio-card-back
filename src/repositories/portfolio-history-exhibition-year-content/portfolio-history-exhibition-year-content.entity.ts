@@ -6,6 +6,6 @@ export class PortfolioHistoryExhibitionYearContent extends CommonEntity {
   @Column()
   portfolioHistoryExhibitionYearId: number;
 
-  @Column()
+  @Column({nullable: true})
   content: string;
 }

@@ -3,7 +3,7 @@
 ##############################################
 
 ### 사용자
-create table `crackit-portfolio`.user
+create table `crackit-portfolio`.author
 (
     id          varchar(50)                          not null comment 'id'
         primary key,
@@ -12,8 +12,8 @@ create table `crackit-portfolio`.user
     name        varchar(50)                          null,
     password    varchar(50)                          null,
     email       varchar(100)                         null,
-    created_at  datetime   default CURRENT_TIMESTAMP null,
-    updated_at  datetime   default CURRENT_TIMESTAMP null,
+--    created_at  datetime   default CURRENT_TIMESTAMP null,
+--    updated_at  datetime   default CURRENT_TIMESTAMP null,
     deleted_at  datetime                             null,
     is_lock     tinyint(1) default 0                 null
 ) comment '유저';
@@ -23,13 +23,13 @@ create table `crackit-portfolio`.user
 create table `crackit-portfolio`.portfolio
 (
     id          varchar(50)                        not null comment '아이디#UUID' primary key,
-    user_id     varchar(50)                        not null comment '사용자 아이디',
+    author_id     varchar(50)                        not null comment '사용자 아이디',
     title       varchar(50) comment '포트폴리오 타이틀',
     description varchar(255) comment '포트폴리오 설명',
     created_at  datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at  datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at  datetime                           null comment '삭제일시',
-    constraint FK_portfolio_art_work_user foreign key (user_id) references `crackit-portfolio`.user (id)
+    constraint FK_portfolio_art_work_author foreign key (author_id) references `crackit-portfolio`.author (id)
 ) comment '작가 포트폴리오';
 
 
@@ -141,9 +141,9 @@ create table `crackit-portfolio`.portfolio_art_work_block_picture
 create table `crackit-portfolio`.file
 (
     id            varchar(50)                        not null comment '아이디#UUID' primary key,
-    user_id       varchar(50)                        not null comment '사용자 아이디',
+    author_id       varchar(50)                        not null comment '사용자 아이디',
     url           varchar(255)                       not null comment 'URL',
-    original_name varchar(255)                       null comment 'Name of the file on the user''s computer	',
+    original_name varchar(255)                       null comment 'Name of the file on the author''s computer	',
     encoding      varchar(50)                        null comment 'Encoding type of the file	',
     mimetype      varchar(50)                        null comment 'Mime type of the file	',
     size          int                                null comment 'Size of the file in bytes',
@@ -154,22 +154,22 @@ create table `crackit-portfolio`.file
     etag          varchar(50)                        null comment 'The etagof the uploaded file in S3',
     versionId     varchar(50)                        null comment 'The versionId is an optional param returned by S3 for versioned buckets.',
     created_at    datetime default CURRENT_TIMESTAMP not null comment '생성일시',
-    constraint FK_file_user_id foreign key (user_id) references `crackit-portfolio`.user (id)
+    constraint FK_file_author_id foreign key (author_id) references `crackit-portfolio`.author (id)
 ) comment '파일';
 
 create index url on `crackit-portfolio`.file (url);
 create index id on `crackit-portfolio`.file (id);
-create index user_id on `crackit-portfolio`.file (user_id);
+create index author_id on `crackit-portfolio`.file (author_id);
 
 select *
 from file;
 
 
 ### 포트폴리오 사용자 노출 정보
-create table `crackit-portfolio`.user_profile
+create table `crackit-portfolio`.author_profile
 (
     id               varchar(50)                        not null comment '아이디#UUID' primary key,
-    user_id          varchar(50)                        not null comment '사용자 id',
+    author_id          varchar(50)                        not null comment '사용자 id',
     profile_image_url text                               comment '작가 프로필 사진',
     nick_name   varchar(50) comment '닉네임',
     phone_number varchar(50) comment '휴대전화 번호',
@@ -177,5 +177,5 @@ create table `crackit-portfolio`.user_profile
     created_at       datetime default CURRENT_TIMESTAMP not null comment '생성일시',
     updated_at       datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '수정일시',
     deleted_at       datetime comment '삭제일시',
-    constraint FK_user_profile_user_id foreign key (user_id) references `crackit-portfolio`.user(id)
+    constraint FK_author_profile_author_id foreign key (author_id) references `crackit-portfolio`.author(id)
 ) comment '사용자 프로필 (포트폴리오 노출 정보)';

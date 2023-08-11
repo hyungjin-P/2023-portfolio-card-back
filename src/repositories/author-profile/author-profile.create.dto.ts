@@ -1,14 +1,14 @@
-import { UserProfile } from './user-profile.entity';
+import { AuthorProfile } from './author-profile.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class UserProfileCreateDto extends UserProfile {
+export class AuthorProfileCreateDto extends AuthorProfile {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
-    description: 'user record id',
+    description: 'author record id',
   })
-  userId: string;
+  authorId: string;
 
   @IsString()
   @IsNotEmpty()

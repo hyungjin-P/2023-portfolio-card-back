@@ -10,11 +10,11 @@ export class PortfolioArtWork extends CommonEntity {
   portfolioId: string;
 
   /** 포트폴리오 제목 */
-  @Column()
+  @Column({nullable: true})
   title: string;
 
   /** 포트폴리오 설명 */
-  @Column()
+  @Column({nullable: true})
   description: string;
 
   /** 포트폴리오 */

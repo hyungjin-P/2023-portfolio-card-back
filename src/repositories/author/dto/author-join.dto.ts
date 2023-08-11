@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UserJoinDto {
+export class AuthorJoinDto {
   @ApiProperty({
     description: '서비스 제공자 도메인',
     example: 'crackit-universe.com',
@@ -11,7 +11,7 @@ export class UserJoinDto {
     description: '서비스 제공자 도메인',
     example: 'crackit-universe.com',
   })
-  userLink: string;
+  authorLink: string;
 
   @ApiProperty({
     description: '서비스 제공자 도메인',

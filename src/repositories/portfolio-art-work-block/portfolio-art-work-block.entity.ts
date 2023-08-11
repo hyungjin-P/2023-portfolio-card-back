@@ -8,19 +8,19 @@ export class PortfolioArtWorkBlock extends CommonEntity {
   @Column()
   portfolioArtWorkId: string;
 
-  @Column()
+  @Column({default: 'image'})
   blockType: string;
 
-  @Column()
+  @Column({default: 0})
   sortNumber: number;
 
-  @Column()
+  @Column({nullable: true})
   title: string;
 
-  @Column()
+  @Column({nullable: true})
   description: string;
 
-  @Column()
+  @Column({default: 1 })
   visibility: boolean;
 
   @ManyToOne(() => PortfolioArtWork, (entity) => entity.portfolioArtWorkBlocks)

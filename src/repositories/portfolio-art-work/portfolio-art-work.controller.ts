@@ -15,8 +15,8 @@ export class PortfolioArtWorkController {
       `사용자 작품 리턴\n\n` + `이전 진행 중인 작품 리턴, 없으면 새로 생성`,
   })
   async initArtWork(
-    @Query('userId') userId: string,
+    @Query('authorId') authorId: string,
   ): Promise<PortfolioArtWork> {
-    return await this.portfolioArtWorkService.initArtwork(userId);
+    return await this.portfolioArtWorkService.initArtwork(authorId);
   }
 }

@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { TypeOrmConfigService } from './configs/type-orm-config.service';
-import { UserModule } from './repositories/user/user.module';
+import { AuthorModule } from './repositories/author/author.module';
 import { NowStage } from './enums/now.stage';
 import { PortfolioModule } from './repositories/portfolio/portfolio.module';
 import { PortfolioMainVisualModule } from './repositories/portfolio-main-visual/portfolio-main-visual.module';
 import { PortfolioMainVisualThemeModule } from './repositories/portfolio-main-visual-theme/portfolio-main-visual-theme.module';
 import { PortfolioMainVisualTagModule } from './repositories/portfolio-main-visual-tag/portfolio-main-visual-tag.module';
-import { UserProfileModule } from './repositories/user-profile/user-profile.module';
+import { AuthorProfileModule } from './repositories/author-profile/author-profile.module';
 import { FileModule } from './repositories/file/file.module';
 import { PortfolioArtWorkModule } from './repositories/portfolio-art-work/portfolio-art-work.module';
 import { PortfolioArtWorkBlockModule } from './repositories/portfolio-art-work-block/portfolio-art-work-block.module';
@@ -28,6 +28,8 @@ import {
 import {
   PortfolioHistoryExhibitionYearContentModule
 } from './repositories/portfolio-history-exhibition-year-content/portfolio-history-exhibition-year-content.module';
+import { SnakeNamingStrategy } from "typeorm-naming-strategies";
+import { join } from "path";
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -43,8 +45,8 @@ const stage =
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
-    UserModule,
-    UserProfileModule,
+    AuthorModule,
+    AuthorProfileModule,
     PortfolioModule,
     PortfolioMainVisualModule,
     PortfolioMainVisualThemeModule,

@@ -6,9 +6,9 @@ export class PortfolioHistoryEtcItem extends CommonEntity {
   @Column()
   portfolioHistoryId: string;
 
-  @Column()
+  @Column({nullable: true})
   period: string;
 
-  @Column()
+  @Column({nullable: true})
   content: string;
 }

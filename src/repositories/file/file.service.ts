@@ -20,26 +20,26 @@ export class FileService {
     fileSaveDto: FileSaveDto,
   ): Promise<FileEntity | void> {
     AWS.config.update({
-      accessKeyId: this.configService.get('AWS_SES_ACCESS_KEY_ID'),
-      secretAccessKey: this.configService.get('AWS_SES_SECRET_ACCESS_KEY'),
-      region: this.configService.get('AWS_SES_REGION'),
+      accessKeyId: this.configService.get('AWS_POWER_USER_ACCESS_KEY'),
+      secretAccessKey: this.configService.get('AWS_POWER_USER_SECRET_ACCESS_KEY'),
+      region: this.configService.get('AWS_POWER_USER_REGION'),
     });
 
     const s3 = new AWS.S3();
-    const domainName = 'REDACTED_S3_BUCKET_2';
-    const path = '/REDACTED_S3_PATH_3';
+    const bucketName = 'REDACTED_S3_BUCKET';
+    const path = '/REDACTED_S3_PATH';
     const fileName = uuidv4();
     let key = `${path}/${fileName}`;
     key = key.replace(/\/\//gi, '/');
     key = key.slice(1, key.length);
 
     const param = {
-      Bucket: domainName,
+      Bucket: bucketName,
       Body: file.buffer,
       Key: key,
     };
 
-    const resultUrl = `https://${domainName}/${key}`;
+    const resultUrl = `https://${bucketName}/${key}`;
 
     let uploadFileTarget: FileEntity;
 
@@ -47,8 +47,8 @@ export class FileService {
       const stored = await s3.upload(param).promise();
 
       const uploadFile = new FileEntity();
-      uploadFile.userId = fileSaveDto.userId;
-      uploadFile.url = `https://${domainName}/${stored.Key}`;
+      uploadFile.authorId = fileSaveDto.authorId;
+      uploadFile.url = `https://${bucketName}.s3.ap-northeast-2.amazonaws.com/${stored.Key}`;
       uploadFile.originalName = file.originalname;
       uploadFile.encoding = file.encoding;
       uploadFile.mimetype = file.mimetype;
@@ -86,14 +86,14 @@ export class FileService {
     console.log('upload file : ', files);
 
     AWS.config.update({
-      accessKeyId: this.configService.get('AWS_SES_ACCESS_KEY_ID'),
-      secretAccessKey: this.configService.get('AWS_SES_SECRET_ACCESS_KEY'),
-      region: this.configService.get('AWS_SES_REGION'),
+      accessKeyId: this.configService.get('AWS_POWER_USER_ACCESS_KEY'),
+      secretAccessKey: this.configService.get('AWS_POWER_USER_SECRET_ACCESS_KEY'),
+      region: this.configService.get('AWS_POWER_USER_REGION'),
     });
     const s3 = new AWS.S3();
-    const domainName = 'REDACTED_S3_BUCKET_2';
+    const bucketName = 'REDACTED_S3_BUCKET';
 
-    const path = '/REDACTED_S3_PATH_3';
+    const path = '/REDACTED_S3_PATH';
 
     const fileName = uuidv4();
     let key = `${path}/${fileName}`;
@@ -102,12 +102,12 @@ export class FileService {
     key = key.slice(1, key.length);
 
     const param = {
-      Bucket: domainName,
+      Bucket: bucketName,
       Body: files[0].buffer,
       Key: key,
     };
 
-    const resultUrl = `https://${domainName}/${key}`;
+    const resultUrl = `https://${bucketName}/${key}`;
 
     console.log('resultUrl : ', resultUrl);
 
@@ -117,8 +117,8 @@ export class FileService {
       const stored = await s3.upload(param).promise();
 
       const uploadFile = new FileEntity();
-      uploadFile.userId = fileSaveDto.userId;
-      uploadFile.url = `https://${domainName}/${stored.Key}`;
+      uploadFile.authorId = fileSaveDto.authorId;
+      uploadFile.url = `https://${bucketName}.s3.ap-northeast-2.amazonaws.com/${stored.Key}`;
       uploadFile.originalName = files[0].originalname;
       uploadFile.encoding = files[0].encoding;
       uploadFile.mimetype = files[0].mimetype;

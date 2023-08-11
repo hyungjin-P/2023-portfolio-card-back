@@ -5,5 +5,5 @@ export class PortfolioCreateNewPortfolioDto {
     description: '사용자 row id',
     example: '059d702b-73bf-479c-b3ed-8723ee7580b9',
   })
-  userId: string;
+  authorId: string;
 }

@@ -6,6 +6,6 @@ export class PortfolioHistoryAwardYear extends CommonEntity {
   @Column()
   portfolioHistoryAwardId: string;
 
-  @Column()
+  @Column({nullable: true})
   period: string;
 }

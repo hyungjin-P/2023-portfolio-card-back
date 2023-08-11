@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PortfolioArtWork } from './portfolio-art-work.entity';
 import { PortfolioArtWorkBlock } from '../portfolio-art-work-block/portfolio-art-work-block.entity';
 import { PortfolioArtWorkPicture } from '../portfolio-art-work-picture/portfolio-art-work-picture.entity';
-import { User } from '../user/user.entity';
+import { Author } from '../author/author.entity';
 import { Portfolio } from '../portfolio/portfolio.entity';
 
 @Module({
@@ -15,7 +15,7 @@ import { Portfolio } from '../portfolio/portfolio.entity';
       PortfolioArtWorkBlock,
       PortfolioArtWorkPicture,
       Portfolio,
-      User,
+      Author,
     ]),
   ],
   providers: [PortfolioArtWorkService],

@@ -16,10 +16,10 @@ export class PortfolioService {
     return await this.portfolioRepository.find();
   }
 
-  async getOne(userId: string): Promise<Portfolio> {
+  async getOne(authorId: string): Promise<Portfolio> {
     const portfolioList = await this.portfolioRepository.find({
       where: {
-        userId,
+        authorId,
       },
       order: {
         updatedAt: 'DESC',
@@ -87,7 +87,7 @@ export class PortfolioService {
   ): Promise<void | Portfolio> {
     const recentPortfolios: Portfolio[] = await this.portfolioRepository.find({
       where: {
-        userId: portfolioCreateNewPortfolioDto.userId,
+        authorId: portfolioCreateNewPortfolioDto.authorId,
       },
     });
 
@@ -96,7 +96,7 @@ export class PortfolioService {
     }
 
     const portfolio: Portfolio = new Portfolio();
-    portfolio.userId = portfolioCreateNewPortfolioDto.userId;
+    portfolio.authorId = portfolioCreateNewPortfolioDto.authorId;
 
     const savedPortfolio = await this.portfolioRepository.save(portfolio);
 

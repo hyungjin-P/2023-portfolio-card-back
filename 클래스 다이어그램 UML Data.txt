@@ -8,7 +8,7 @@ Table 양식 {
 
 
 ## 유저 정보
-Table User :: 사용자 {
+Table Author :: 사용자 {
   id, string, , pk;
   provider, string, , ;
   provider_id, string, , ;
@@ -23,9 +23,9 @@ Table User :: 사용자 {
 
 
 ## 유저 프로필
-Table UserProfile :: 사용자 노출 정보 {
+Table AuthorProfile :: 사용자 노출 정보 {
   id, string, ,pk;
-  user_id, string , ,fk;
+  author_id, string , ,fk;
   avatar_image_url, string , , ;
   nick_name, string, , ;
   phone_number, string, , ;
@@ -39,7 +39,7 @@ Table UserProfile :: 사용자 노출 정보 {
 ## 파일
 Table File {
   id, string, , PK;
-  user_id, string, , ;
+  author_id, string, , ;
   url, string, , ;
   original_name, string, , ;
   encoding, string, , ;
@@ -57,7 +57,7 @@ Table File {
 ## 포트폴리오
 Table Portfolio {
   id, string, , PK;
-  user_id, string, , fk;
+  author_id, string, , fk;
   title, string , , ;
   description, , ,;
   created_at, string, , ;

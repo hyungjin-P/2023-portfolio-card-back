@@ -6,6 +6,6 @@ export class PortfolioHistorySnsLink extends CommonEntity {
   @Column()
   portfolioHistoryId: string;
 
-  @Column()
+  @Column({nullable: true})
   snsUrl: string;
 }

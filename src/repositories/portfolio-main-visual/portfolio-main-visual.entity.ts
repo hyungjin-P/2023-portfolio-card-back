@@ -9,16 +9,16 @@ export class PortfolioMainVisual extends CommonEntity {
   @Column()
   portfolioId: string;
 
-  @Column()
+  @Column({nullable: true})
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   mainVisualUrl: string;
 
-  @Column()
+  @Column({nullable: true})
   nickName: string;
 
-  @Column()
+  @Column({nullable: true})
   subTitle: string;
 
   @ManyToOne(() => Portfolio, (portfolio) => portfolio.portfolioMainVisuals)

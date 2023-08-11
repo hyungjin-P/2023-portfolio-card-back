@@ -8,7 +8,7 @@ export class PortfolioMainVisualTag extends CommonEntity {
   @Column()
   portfolioMainVisualId: string;
 
-  @Column()
+  @Column({nullable: true})
   content: string;
 
   @ManyToOne(

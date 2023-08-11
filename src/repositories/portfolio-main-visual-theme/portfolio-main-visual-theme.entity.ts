@@ -7,19 +7,19 @@ export class PortfolioMainVisualTheme extends CommonEntity {
   @Column()
   portfolioMainVisualId: string;
 
-  @Column()
+  @Column({nullable: true})
   controllerClass: string;
 
-  @Column()
+  @Column({nullable: true})
   shareButtonClass: string;
 
-  @Column()
+  @Column({nullable: true})
   titleClass: string;
 
-  @Column()
+  @Column({nullable: true})
   subTitleClass: string;
 
-  @Column()
+  @Column({nullable: true})
   tagClass: string;
 
   @ManyToOne(

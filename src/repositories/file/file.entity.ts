@@ -6,21 +6,21 @@ export class FileEntity {
   id: string;
 
   @Column()
-  userId: string;
+  authorId: string;
 
   @Column()
   url: string;
 
-  @Column()
+  @Column({nullable: true})
   originalName: string;
 
-  @Column()
+  @Column({nullable: true})
   encoding: string;
 
-  @Column()
+  @Column({nullable: true})
   mimetype: string;
 
-  @Column()
+  @Column({nullable: true})
   size: number;
 
   @Column()
@@ -29,18 +29,18 @@ export class FileEntity {
   @Column()
   key: string;
 
-  @Column()
+  @Column({nullable: true})
   acl: string;
 
-  @Column()
+  @Column({nullable: true})
   location: string;
 
-  @Column()
+  @Column({nullable: true})
   etag: string;
 
-  @Column()
+  @Column({nullable: true})
   versionId: string;
 
-  @Column({ default: true })
+  @Column({ default: ()=>'CURRENT_TIMESTAMP(0)', type: 'timestamp without time zone'  })
   createdAt: Date;
 }

@@ -18,7 +18,7 @@ export class PortfolioController {
     description: `포트폴리오 추가`,
     schema: {
       example: {
-        userId: '사용자 id',
+        authorId: '사용자 id',
         title: '포트폴리오 타이틀',
         description: '포트폴리오 내용',
       },
@@ -39,7 +39,7 @@ export class PortfolioController {
     description: `포트폴리오 추가`,
     schema: {
       example: {
-        userId: '사용자 id',
+        authorId: '사용자 id',
         title: '포트폴리오 타이틀',
         description: '포트폴리오 내용',
       },

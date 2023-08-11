@@ -4,7 +4,7 @@ import { PortfolioArtWork } from './portfolio-art-work.entity';
 import { Repository } from 'typeorm';
 import { PortfolioArtWorkBlock } from '../portfolio-art-work-block/portfolio-art-work-block.entity';
 import { PortfolioArtWorkPicture } from '../portfolio-art-work-picture/portfolio-art-work-picture.entity';
-import { User } from '../user/user.entity';
+import { Author } from '../author/author.entity';
 import { Portfolio } from '../portfolio/portfolio.entity';
 
 @Injectable()
@@ -16,16 +16,16 @@ export class PortfolioArtWorkService {
     private portfolioArtWorkBlockRepository: Repository<PortfolioArtWorkBlock>,
     @InjectRepository(PortfolioArtWorkPicture)
     private portfolioArtWorkPictureRepository: Repository<PortfolioArtWorkPicture>,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    @InjectRepository(Author)
+    private authorRepository: Repository<Author>,
     @InjectRepository(Portfolio)
     private portfolioRepository: Repository<Portfolio>,
   ) {}
 
-  async initArtwork(userId: string): Promise<PortfolioArtWork> {
+  async initArtwork(authorId: string): Promise<PortfolioArtWork> {
     const recentPortfolios: Portfolio[] = await this.portfolioRepository.find({
       where: {
-        userId,
+        authorId,
       },
       order: {
         updatedAt: 'DESC',
@@ -36,7 +36,7 @@ export class PortfolioArtWorkService {
 
     if (recentPortfolios.length === 0) {
       recentPortfolio = await this.portfolioRepository.save({
-        userId,
+        authorId,
         title: '',
         description: '',
       });

@@ -8,11 +8,11 @@ export class PortfolioHistory extends CommonEntity {
   portfolioId: string;
 
   /** 포트폴리오 작가 이력 제목 */
-  @Column()
+  @Column({nullable: true})
   title: string;
 
   /** 포트폴리오 작가 이력 설명 */
-  @Column()
+  @Column({nullable: true})
   description: string;
 
   /** 포트폴리오 */

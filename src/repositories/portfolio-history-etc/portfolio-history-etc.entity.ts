@@ -6,6 +6,6 @@ export class PortfolioHistoryEtc extends CommonEntity {
   @Column()
   portfolioHistoryId: string;
 
-  @Column()
+  @Column({nullable: true})
   contentTitle: string;
 }
