@@ -8,6 +8,15 @@ import { PortfolioArtWork } from './portfolio-art-work.entity';
 export class PortfolioArtWorkController {
   constructor(private portfolioArtWorkService: PortfolioArtWorkService) {}
 
+  @Get('/getAll')
+  @ApiOperation({
+    summary: '작품 전체 조회',
+    description: '모든 사용자 작품 조회'
+  })
+  async getAll(): Promise<PortfolioArtWork[]>{
+    return await  this.portfolioArtWorkService.getAll();
+  }
+
   @Get('/init')
   @ApiOperation({
     summary: '사용자 작품 세팅',

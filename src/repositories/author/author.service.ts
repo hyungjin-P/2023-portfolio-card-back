@@ -2,26 +2,22 @@ import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Author } from './author.entity';
 import { Repository } from 'typeorm';
-import { AuthorProfile } from '../author-profile/author-profile.entity';
 import { AuthorTempDto } from './dto/author-temp.dto';
 import { AuthorJoinDto } from './dto/author-join.dto';
 import { AuthorLoginDto } from './dto/author-login.dto';
+import { Portfolio } from "../portfolio/portfolio.entity";
 
 @Injectable()
 export class AuthorService {
   constructor(
     @InjectRepository(Author)
     private authorRepository: Repository<Author>,
-    @InjectRepository(AuthorProfile)
-    private authorProfileRepository: Repository<AuthorProfile>,
+    @InjectRepository(Portfolio)
+    private authorProfileRepository: Repository<Portfolio>,
   ) {}
 
   async getAll(): Promise<Author[]> {
-    return await this.authorRepository.find({
-      relations: {
-        authorProfiles: true,
-      },
-    });
+    return await this.authorRepository.find({});
   }
 
   async createAuthor(): Promise<Author> {
@@ -138,6 +134,13 @@ export class AuthorService {
   }
 
   async findAuthorIdByAuthorLink(authorLink: string) {
-    return undefined;
+    return await this.authorRepository.findOne({
+      where:{
+        authorLink: authorLink,
+      },
+      relations: {
+        portfolios: true,
+      },
+    });
   }
 }

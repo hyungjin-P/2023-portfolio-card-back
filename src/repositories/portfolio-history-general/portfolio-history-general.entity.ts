@@ -7,11 +7,8 @@ export class PortfolioHistoryGeneral extends CommonEntity {
   portfolioHistoryId: string;
 
   @Column({nullable: true})
-  profileImageUrl: string;
+  generalImageUrl: string;
 
   @Column({nullable: true})
-  title: string;
-
-  @Column({nullable: true})
-  description: string;
+  nickname: string;
 }

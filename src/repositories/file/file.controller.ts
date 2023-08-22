@@ -22,10 +22,10 @@ export class FileController {
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FilesInterceptor('files'))
   async uploadFile(
-    @UploadedFiles() file: Array<Express.Multer.File>,
+    @UploadedFiles() files: Array<Express.Multer.File>,
     @Body() fileSaveDto: FileSaveDto,
   ): Promise<any> {
-    return await this.fileService.fileSave(file, fileSaveDto);
+    return await this.fileService.filesSave(files, fileSaveDto);
   }
 
   @Post('/uploadFileOne')

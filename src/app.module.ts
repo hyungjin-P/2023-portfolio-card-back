@@ -10,7 +10,6 @@ import { PortfolioModule } from './repositories/portfolio/portfolio.module';
 import { PortfolioMainVisualModule } from './repositories/portfolio-main-visual/portfolio-main-visual.module';
 import { PortfolioMainVisualThemeModule } from './repositories/portfolio-main-visual-theme/portfolio-main-visual-theme.module';
 import { PortfolioMainVisualTagModule } from './repositories/portfolio-main-visual-tag/portfolio-main-visual-tag.module';
-import { AuthorProfileModule } from './repositories/author-profile/author-profile.module';
 import { FileModule } from './repositories/file/file.module';
 import { PortfolioArtWorkModule } from './repositories/portfolio-art-work/portfolio-art-work.module';
 import { PortfolioArtWorkBlockModule } from './repositories/portfolio-art-work-block/portfolio-art-work-block.module';
@@ -30,6 +29,12 @@ import {
 } from './repositories/portfolio-history-exhibition-year-content/portfolio-history-exhibition-year-content.module';
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { join } from "path";
+import {
+  PortfolioHistoryGeneralModule
+} from "./repositories/portfolio-history-general/portfolio-history-general.module";
+import {
+  PortfolioHistoryContactModule
+} from "./repositories/portfolio-history-contact/portfolio-history-contact.module";
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -46,7 +51,6 @@ const stage =
       useClass: TypeOrmConfigService,
     }),
     AuthorModule,
-    AuthorProfileModule,
     PortfolioModule,
     PortfolioMainVisualModule,
     PortfolioMainVisualThemeModule,
@@ -55,6 +59,8 @@ const stage =
     PortfolioArtWorkBlockModule,
     PortfolioArtWorkPictureModule,
     PortfolioHistoryModule,
+    PortfolioHistoryGeneralModule,
+    PortfolioHistoryContactModule,
     PortfolioHistoryAwardModule,
     PortfolioHistoryAwardYearModule,
     PortfolioHistoryAwardYearContentModule,

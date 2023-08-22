@@ -3,10 +3,10 @@ import { AuthorService } from './author.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Author } from './author.entity';
 import { AuthorController } from './author.controller';
-import { AuthorProfile } from '../author-profile/author-profile.entity';
+import { Portfolio } from "../portfolio/portfolio.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Author, AuthorProfile])],
+  imports: [TypeOrmModule.forFeature([Author, Portfolio])],
   providers: [AuthorService],
   controllers: [AuthorController],
 })

@@ -22,6 +22,21 @@ export class PortfolioArtWorkService {
     private portfolioRepository: Repository<Portfolio>,
   ) {}
 
+  async getAll() {
+    const portfolioArtWorks: PortfolioArtWork[] = await this.portfolioArtWorkRepository.find(
+      {
+        relations: {
+          portfolioArtWorkBlocks: true,
+        },
+        order: {
+          createdAt: 'DESC',
+        },
+      }
+    );
+
+    return portfolioArtWorks;
+  }
+
   async initArtwork(authorId: string): Promise<PortfolioArtWork> {
     const recentPortfolios: Portfolio[] = await this.portfolioRepository.find({
       where: {
@@ -50,10 +65,14 @@ export class PortfolioArtWorkService {
           portfolioId: recentPortfolio.id,
         },
         relations: {
-          portfolioArtWorkBlocks: true,
+          portfolioArtWorkBlocks: {
+            portfolioArtWorkPictures: true
+          },
         },
         order: {
-          updatedAt: 'DESC',
+          portfolioArtWorkBlocks: {
+            sortNumber: 'ASC',
+          },
         },
       });
 
@@ -64,12 +83,18 @@ export class PortfolioArtWorkService {
         portfolioId: recentPortfolio.id,
       });
 
+      await this.portfolioArtWorkBlockRepository.save({
+        portfolioArtWorkId: savedPortfolioArtWork.id,
+      })
+
       resultPortfolioArtWork = await this.portfolioArtWorkRepository.findOne({
         where: {
           id: savedPortfolioArtWork.id,
         },
         relations: {
-          portfolioArtWorkBlocks: true,
+          portfolioArtWorkBlocks: {
+            portfolioArtWorkPictures: true
+          },
         },
       });
     } else {

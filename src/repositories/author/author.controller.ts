@@ -139,13 +139,13 @@ export class AuthorController {
     return await this.authorService.deleteAuthor(authorId);
   }
 
-  @Get('/getAll')
+  @Get('/getAuthorByAuthorLink')
   @ApiOperation({
-    summary: '사용자 정보 전체 조회',
-    description: '사용자 정보 전체 조회',
+    summary: '사용자 정보를 링크로 조회',
+    description: '사용자 정보를 링크로 조회',
   })
   @ApiCreatedResponse({
-    description: `사용자 정보를 전체조회 한다.`,
+    description: `사용자 정보를 링크로 조회한다.`,
     type: Author,
   })
   async findAuthorIdByAuthorLink(@Query('authorLink') authorLink: string): Promise<Author> {

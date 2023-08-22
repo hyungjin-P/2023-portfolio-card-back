@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import { AuthorProfile } from '../author-profile/author-profile.entity';
 import { Portfolio } from '../portfolio/portfolio.entity';
 
 @Entity('author')
@@ -51,9 +50,6 @@ export class Author {
   @Column({ default: true })
   serviceTerm: boolean;
 
-  @OneToMany(() => AuthorProfile, (authorProfile) => authorProfile.author)
-  authorProfiles: AuthorProfile[];
-
-  @OneToMany(() => AuthorProfile, (authorProfile) => authorProfile.author)
+  @OneToMany(() => Portfolio, (portfolio) => portfolio.author)
   portfolios: Portfolio[];
 }
