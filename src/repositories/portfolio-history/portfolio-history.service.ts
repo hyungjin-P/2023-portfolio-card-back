@@ -7,6 +7,31 @@ import { Repository } from 'typeorm';
 export class PortfolioHistoryService {
   constructor(
     @InjectRepository(PortfolioHistory)
-    private PortfolioHistoryRepository: Repository<PortfolioHistory>,
+    private portfolioHistoryRepository: Repository<PortfolioHistory>,
   ) {}
+
+  async createPortfolioHistory(portfolioId: string) {
+    let history: PortfolioHistory = await this.portfolioHistoryRepository.findOne({
+      where:{portfolioId: portfolioId,}
+    });
+
+    if(!history){
+      history = await this.portfolioHistoryRepository.save({portfolioId: portfolioId});
+    }
+    return history;
+  }
+
+  async getAllHistoryByPortfolioId(portfolioId: string): Promise<PortfolioHistory> {
+    return await this.portfolioHistoryRepository.findOne({
+      where: {
+        portfolioId: portfolioId,
+      },
+      relations: {
+        portfolioHistoryGenerals: true,
+      },
+      order: {
+
+      }
+    });
+  }
 }

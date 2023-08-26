@@ -1,19 +1,12 @@
 import { CommonEntity } from '../common/common.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { Portfolio } from '../portfolio/portfolio.entity';
+import { PortfolioHistoryGeneral } from "../portfolio-history-general/portfolio-history-general.entity";
 
 @Entity('portfolio_history')
 export class PortfolioHistory extends CommonEntity {
   @Column()
   portfolioId: string;
-
-  /** 포트폴리오 작가 이력 제목 */
-  @Column({nullable: true})
-  title: string;
-
-  /** 포트폴리오 작가 이력 설명 */
-  @Column({nullable: true})
-  description: string;
 
   /** 포트폴리오 작가 프로필 블럭 공개 여부  */
   @Column({default: true})
@@ -31,12 +24,10 @@ export class PortfolioHistory extends CommonEntity {
   @Column({default: true})
   snsIsPublic: boolean;
 
-
   /** 포트폴리오 */
-  @ManyToOne(() => Portfolio, (entity) => entity.portfolioArtWorks)
+  @ManyToOne(() => Portfolio, (entity) => entity.portfolioHistories)
   portfolio: Portfolio;
 
-  /** 포트폴리오 작품 */
-  // @OneToMany(() => PortfolioArtWork, (entity) => entity.portfolio)
-  // portfolioArtWorks: PortfolioArtWork[];
+  @OneToMany(() => PortfolioHistoryGeneral, (entity)=> entity.portfolioHistory)
+  portfolioHistoryGenerals: PortfolioHistoryGeneral[];
 }

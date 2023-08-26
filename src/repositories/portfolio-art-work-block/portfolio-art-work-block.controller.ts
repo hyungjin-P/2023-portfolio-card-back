@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Query } from "@nestjs/common";
 import { PortfolioArtWorkBlockService } from './portfolio-art-work-block.service';
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { PortfolioArtWorkBlockCreateDto } from "./dto/portfolio-art-work-block-create.dto";
@@ -54,4 +54,16 @@ export class PortfolioArtWorkBlockController {
       saveDto,
     );
   }
+
+  @Delete('/delete')
+  @ApiOperation({
+    summary: '포트폴리오 작품 블럭 삭제'
+  })
+  async deletePortfolioArtWorkBlock(
+    @Query('id') id: string
+  ){
+    return await this.portfolioArtWorkBlockService.deletePortfolioArtWorkBlock(id);
+  }
+
+
 }

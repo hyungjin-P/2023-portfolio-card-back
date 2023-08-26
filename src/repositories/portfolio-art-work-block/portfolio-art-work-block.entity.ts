@@ -20,7 +20,7 @@ export class PortfolioArtWorkBlock extends CommonEntity {
   @Column({nullable: true})
   description: string;
 
-  @Column({default: 1 })
+  @Column({default: true })
   visibility: boolean;
 
   @ManyToOne(() => PortfolioArtWork, (entity) => entity.portfolioArtWorkBlocks)

@@ -63,4 +63,8 @@ export class PortfolioArtWorkBlockService {
 
     return savedPortfolioArtWorkBlock;
   }
+
+  async deletePortfolioArtWorkBlock(id: string) {
+    return await this.portfolioArtWorkBlockRepository.delete(id);
+  }
 }

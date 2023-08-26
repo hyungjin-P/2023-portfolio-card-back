@@ -20,7 +20,7 @@ export class Portfolio extends CommonEntity {
   author: Author;
 
   @OneToMany(() => PortfolioHistory, (entity) => entity.portfolio)
-  portfolioHistory: PortfolioHistory[];
+  portfolioHistories: PortfolioHistory[];
 
   @OneToMany(() => PortfolioMainVisual, (entity) => entity.portfolio)
   portfolioMainVisuals: PortfolioMainVisual[];

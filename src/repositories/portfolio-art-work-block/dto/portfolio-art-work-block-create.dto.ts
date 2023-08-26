@@ -19,10 +19,4 @@ export class PortfolioArtWorkBlockCreateDto extends PortfolioArtWorkBlock{
     default: 0,
   })
   sortNumber: number;
-
-  @ApiProperty({
-    description: 'block visibility',
-    default: 1
-  })
-  visibility: boolean;
 }

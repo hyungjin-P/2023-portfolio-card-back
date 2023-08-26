@@ -19,7 +19,7 @@ async function bootstrap() {
   app.enableCors();
 
   const configService: ConfigService = app.get(ConfigService);
-  const port = configService.get('SERVER_PORT');
+  const port = configService.get('SERVER_PORT') || 3000;
 
   runningPort = port;
 
@@ -50,7 +50,7 @@ async function bootstrap() {
     module.hot.dispose(() => app.close());
   }
 
-  await app.listen(port, "0.0.0.0");
+  app.listen(port, "0.0.0.0").then();
 }
 
 bootstrap().then(

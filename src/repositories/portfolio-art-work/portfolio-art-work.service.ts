@@ -59,8 +59,8 @@ export class PortfolioArtWorkService {
       recentPortfolio = recentPortfolios[0];
     }
 
-    const portfolioArtWorks: PortfolioArtWork[] =
-      await this.portfolioArtWorkRepository.find({
+    const portfolioArtWorks: PortfolioArtWork =
+      await this.portfolioArtWorkRepository.findOne({
         where: {
           portfolioId: recentPortfolio.id,
         },
@@ -78,14 +78,10 @@ export class PortfolioArtWorkService {
 
     let resultPortfolioArtWork: PortfolioArtWork;
 
-    if (portfolioArtWorks.length === 0) {
+    if (!portfolioArtWorks) {
       const savedPortfolioArtWork = await this.portfolioArtWorkRepository.save({
         portfolioId: recentPortfolio.id,
       });
-
-      await this.portfolioArtWorkBlockRepository.save({
-        portfolioArtWorkId: savedPortfolioArtWork.id,
-      })
 
       resultPortfolioArtWork = await this.portfolioArtWorkRepository.findOne({
         where: {
@@ -98,7 +94,7 @@ export class PortfolioArtWorkService {
         },
       });
     } else {
-      resultPortfolioArtWork = portfolioArtWorks[0];
+      resultPortfolioArtWork = portfolioArtWorks;
     }
 
     return resultPortfolioArtWork;
