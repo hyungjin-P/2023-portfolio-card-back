@@ -28,6 +28,7 @@ export class PortfolioHistoryService {
       },
       relations: {
         portfolioHistoryGenerals: true,
+        portfolioHistoryContacts: true,
       },
       order: {
 

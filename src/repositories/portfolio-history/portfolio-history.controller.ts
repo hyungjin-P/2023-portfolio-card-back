@@ -20,6 +20,9 @@ export class PortfolioHistoryController {
   }
 
   @Get('/getAllHistoryByPortfolioId')
+  @ApiOperation({
+    summary: '포트폴리오 아이디로 작가 정보 일괄 조회'
+  })
   async getAllHistoryById(
     @Query('portfolioId') portfolioId: string
   ): Promise<PortfolioHistory>{

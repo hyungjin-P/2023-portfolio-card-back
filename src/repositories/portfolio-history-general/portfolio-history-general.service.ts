@@ -12,7 +12,7 @@ export class PortfolioHistoryGeneralService {
   ) {
   }
 
-  async createPortfolioGeneral(portfolioHistoryId: string) {
+  async createPortfolioGeneral(portfolioHistoryId: string): Promise<PortfolioHistoryGeneral> {
     let general: PortfolioHistoryGeneral = await this.portfolioHistoryGeneralRepository.findOne({
         where: {
           portfolioHistoryId: portfolioHistoryId,
@@ -27,8 +27,8 @@ export class PortfolioHistoryGeneralService {
     return general;
   }
 
-  async savePortfolioGeneral(portfolioGeneral: PortfolioHistoryGeneral) {
-    const savedGeneral = await this.portfolioHistoryGeneralRepository.save(portfolioGeneral)
+  async savePortfolioGeneral(portfolioGeneral: PortfolioHistoryGeneral): Promise<PortfolioHistoryGeneral> {
+    const savedGeneral = await this.portfolioHistoryGeneralRepository.save(portfolioGeneral);
 
     if(!savedGeneral){
       throw new HttpException(
@@ -40,7 +40,7 @@ export class PortfolioHistoryGeneralService {
     return savedGeneral;
   }
 
-  async getAll() {
+  async getAll(): Promise<PortfolioHistoryGeneral[]> {
     return await this.portfolioHistoryGeneralRepository.find();
   }
 

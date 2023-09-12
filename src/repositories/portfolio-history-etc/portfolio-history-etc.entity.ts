@@ -1,5 +1,6 @@
 import { CommonEntity } from '../common/common.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from "typeorm";
+import { PortfolioHistoryEtcSubtitle } from "../portfolio-history-etc-subtitle/portfolio-history-etc-subtitle.entity";
 
 @Entity('portfolio_history_etc')
 export class PortfolioHistoryEtc extends CommonEntity {
@@ -7,5 +8,9 @@ export class PortfolioHistoryEtc extends CommonEntity {
   portfolioHistoryId: string;
 
   @Column({nullable: true})
-  contentTitle: string;
+  title: string;
+
+  @ManyToOne(()=>PortfolioHistoryEtcSubtitle,
+    (entity)=>entity.etc)
+  subtitles: PortfolioHistoryEtcSubtitle[];
 }

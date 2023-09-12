@@ -12,7 +12,7 @@ export class PortfolioHistoryGeneralController {
   @ApiOperation({
     summary: '포트폴리오 기본 정보 전체 조회'
   })
-  async getAllPortfolioGeneral(){
+  async getAllPortfolioGeneral(): Promise<PortfolioHistoryGeneral[]>{
     return await this.portfolioHistoryGeneralService.getAll();
   }
 
@@ -22,7 +22,7 @@ export class PortfolioHistoryGeneralController {
   })
   async createPortfolioGeneral(
     @Query('portfolioHistoryId') portfolioHistoryId: string,
-  ){
+  ): Promise<PortfolioHistoryGeneral>{
     return await this.portfolioHistoryGeneralService.createPortfolioGeneral(portfolioHistoryId);
   }
 
@@ -32,7 +32,7 @@ export class PortfolioHistoryGeneralController {
   })
   async savePortfolioGeneral(
     @Body() portfolioGeneral: PortfolioHistoryGeneral,
-  ){
+  ): Promise<PortfolioHistoryGeneral>{
     return await this.portfolioHistoryGeneralService.savePortfolioGeneral(portfolioGeneral);
   }
 
