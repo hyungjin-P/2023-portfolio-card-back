@@ -21,12 +21,6 @@ import { PortfolioHistoryAwardSubtitleValueModule } from './repositories/portfol
 import {
   PortfolioHistoryExhibitionModule
 } from './repositories/portfolio-history-exhibition/portfolio-history-exhibition.module';
-import {
-  PortfolioHistoryExhibitionSubtitleModule
-} from './repositories/portfolio-history-exhibition-subtitle/portfolio-history-exhibition-subtitle.module';
-import {
-  PortfolioHistoryExhibitionSubtitleValueModule
-} from './repositories/portfolio-history-exhibition-subtitle-value/portfolio-history-exhibition-subtitle-value.module';
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { join } from "path";
 import {
@@ -69,8 +63,6 @@ const stage =
     PortfolioHistoryAwardSubtitleModule,
     PortfolioHistoryAwardSubtitleValueModule,
     PortfolioHistoryExhibitionModule,
-    PortfolioHistoryExhibitionSubtitleModule,
-    PortfolioHistoryExhibitionSubtitleValueModule,
     FileModule,
   ],
   controllers: [AppController],

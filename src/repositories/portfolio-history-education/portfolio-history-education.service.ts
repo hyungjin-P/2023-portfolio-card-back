@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import {
   PortfolioHistoryEducation,
@@ -6,7 +6,6 @@ import {
   PortfolioHistoryEducationSubtitleValue
 } from "./portfolio-history-education.entity";
 import { Repository } from "typeorm";
-import { PortfolioHistoryEducationSaveDtoList } from "./dto/portfolio-history-education-save.dto";
 
 @Injectable()
 export class PortfolioHistoryEducationService {
@@ -16,7 +15,7 @@ export class PortfolioHistoryEducationService {
     @InjectRepository(PortfolioHistoryEducationSubtitle)
     private educationSubtitleRepository: Repository<PortfolioHistoryEducationSubtitle>,
     @InjectRepository(PortfolioHistoryEducationSubtitleValue)
-    private educationSubtitleValueRepository: Repository<PortfolioHistoryEducationSubtitle>
+    private educationSubtitleValueRepository: Repository<PortfolioHistoryEducationSubtitleValue>
   ) {}
 
   async getAll(): Promise<PortfolioHistoryEducation[]> {
@@ -33,31 +32,53 @@ export class PortfolioHistoryEducationService {
   }
 
   async getDataByPortfolioHistoryId(historyId: string): Promise<PortfolioHistoryEducation[]>{
-    return await this.educationRepository.find({
+    const educationList: PortfolioHistoryEducation[] = await this.educationRepository.find({
       where: {
         portfolioHistoryId: historyId,
       },
       relations: {
         subtitles: {
-          values : true,
-        }
+          values: true,
+        },
       },
       order: {
         createdAt: 'DESC',
       }
-    })
+    });
+
+    return educationList;
   }
 
-  async saveData(saveList: PortfolioHistoryEducationSaveDtoList) {
-    console.log(saveList);
-    saveList.educationBlockSections.map((block)=>{
+  async saveData(historyId, saveList: PortfolioHistoryEducation[]): Promise<PortfolioHistoryEducation[]> {
+    saveList.map(async (block)=>{
       if(block.id.length > 5){
-        console.log('save : ', block.id);
+        await this.educationSubtitleRepository.save({
+          id: block.subtitles[0].id,
+          subtitle: block.subtitles[0].subtitle,
+        });
+        await this.educationSubtitleValueRepository.save({
+          id: block.subtitles[0].values[0].id,
+          value: block.subtitles[0].values[0].value,
+        })
       }else{
-        console.log('create : ', block.id);
+        const savedEducation: PortfolioHistoryEducation = await this.educationRepository.save({
+          portfolioHistoryId: historyId,
+          title: 'none title content',
+        });
+
+        const savedEducationSubtitle: PortfolioHistoryEducationSubtitle = await this.educationSubtitleRepository.save({
+          portfolioHistoryEducationId: savedEducation.id,
+          subtitle: block.subtitles[0].subtitle,
+        });
+
+        const savedEducationValue: PortfolioHistoryEducationSubtitleValue
+         = await this.educationSubtitleValueRepository.save({
+          portfolioHistoryEducationSubtitleId: savedEducationSubtitle.id,
+          value: block.subtitles[0].values[0].value,
+         });
       }
     });
 
-    return Promise.resolve(undefined);
+    return await this.getDataByPortfolioHistoryId(historyId);
   }
 }

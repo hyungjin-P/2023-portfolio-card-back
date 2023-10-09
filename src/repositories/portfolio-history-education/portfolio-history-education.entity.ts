@@ -9,7 +9,7 @@ export class PortfolioHistoryEducation extends CommonEntity {
   @Column({nullable: true})
   title: string;
 
-  @OneToMany(()=>PortfolioHistoryEducationSubtitle,(entity)=>entity.education)
+  @OneToMany(()=>PortfolioHistoryEducationSubtitle, (entity)=> entity.portfolioHistoryEducation)
   subtitles: PortfolioHistoryEducationSubtitle[];
 }
 
@@ -19,14 +19,14 @@ export class PortfolioHistoryEducationSubtitle extends CommonEntity {
   @Column()
   portfolioHistoryEducationId: string;
 
-  @Column({nullable: true})
-  subtitle: string;
+  @Column("text", {nullable: true})
+  subtitle: any;
 
-  @ManyToOne(()=>PortfolioHistoryEducation, (entity)=>entity.subtitles)
-  education: PortfolioHistoryEducation;
+  @ManyToOne(()=>PortfolioHistoryEducation, (entity)=> entity.subtitles)
+  portfolioHistoryEducation: PortfolioHistoryEducation;
 
   @OneToMany(()=>PortfolioHistoryEducationSubtitleValue,
-    (entity)=>entity.educationSubtitle)
+    (entity)=>entity.portfolioHistoryEducationSubtitle)
   values: PortfolioHistoryEducationSubtitleValue[];
 }
 
@@ -40,5 +40,5 @@ export class PortfolioHistoryEducationSubtitleValue extends CommonEntity {
 
   @ManyToOne(()=>PortfolioHistoryEducationSubtitle,
     (entity)=>entity.values)
-  educationSubtitle: PortfolioHistoryEducationSubtitle;
+  portfolioHistoryEducationSubtitle: PortfolioHistoryEducationSubtitle;
 }

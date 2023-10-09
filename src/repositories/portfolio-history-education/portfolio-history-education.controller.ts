@@ -2,13 +2,11 @@ import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { PortfolioHistoryEducationService } from "./portfolio-history-education.service";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { PortfolioHistoryEducation } from "./portfolio-history-education.entity";
-import { PortfolioHistoryEducationSaveDtoList } from "./dto/portfolio-history-education-save.dto";
 
 @Controller('portfolio-history-education')
 @ApiTags('포트폴리오 학력')
 export class PortfolioHistoryEducationController {
-  constructor(private portfolioHistoryEducationService
-                : PortfolioHistoryEducationService) {}
+  constructor(private service: PortfolioHistoryEducationService) {}
 
   @Get('/getAll')
   @ApiOperation({
@@ -16,7 +14,7 @@ export class PortfolioHistoryEducationController {
     description: '모든 이용자 학력 정보 조회'
   })
   async getAll(): Promise<PortfolioHistoryEducation[]>{
-    return await this.portfolioHistoryEducationService.getAll();
+    return await this.service.getAll();
   }
 
   @Get('/getData')
@@ -27,7 +25,7 @@ export class PortfolioHistoryEducationController {
   async getDataByPortfolioHistoryId(
     @Query('historyId') historyId: string,
   ): Promise<PortfolioHistoryEducation[]>{
-    return await this.portfolioHistoryEducationService.getDataByPortfolioHistoryId(historyId);
+    return await this.service.getDataByPortfolioHistoryId(historyId);
   }
 
   @Post('/saveData')
@@ -37,8 +35,9 @@ export class PortfolioHistoryEducationController {
       '학력 정보를 순차적으로 저장'
   })
   async saveData(
-    @Body() saveList: PortfolioHistoryEducationSaveDtoList,
-  ){
-    return await this.portfolioHistoryEducationService.saveData(saveList);
+    @Query('historyId') historyId: string,
+    @Body() saveList: PortfolioHistoryEducation[],
+  ): Promise<PortfolioHistoryEducation[]>{
+    return await this.service.saveData(historyId, saveList);
   }
 }
