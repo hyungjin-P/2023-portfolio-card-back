@@ -16,13 +16,9 @@ import { PortfolioArtWorkBlockModule } from './repositories/portfolio-art-work-b
 import { PortfolioArtWorkPictureModule } from './repositories/portfolio-art-work-picture/portfolio-art-work-picture.module';
 import { PortfolioHistoryModule } from './repositories/portfolio-history/portfolio-history.module';
 import { PortfolioHistoryAwardModule } from './repositories/portfolio-history-award/portfolio-history-award.module';
-import { PortfolioHistoryAwardSubtitleModule } from './repositories/portfolio-history-award-subtitle/portfolio-history-award-subtitle.module';
-import { PortfolioHistoryAwardSubtitleValueModule } from './repositories/portfolio-history-award-subtitle-value/portfolio-history-award-subtitle-value.module';
 import {
   PortfolioHistoryExhibitionModule
 } from './repositories/portfolio-history-exhibition/portfolio-history-exhibition.module';
-import { SnakeNamingStrategy } from "typeorm-naming-strategies";
-import { join } from "path";
 import {
   PortfolioHistoryGeneralModule
 } from "./repositories/portfolio-history-general/portfolio-history-general.module";
@@ -32,6 +28,7 @@ import {
 import {
   PortfolioHistoryEducationModule
 } from "./repositories/portfolio-history-education/portfolio-history-education.module";
+import { PortfolioHistoryEtcModule } from "./repositories/portfolio-history-etc/portfolio-history-etc.module";
 
 const stage =
   process.env.NODE_ENV === 'production'
@@ -60,9 +57,8 @@ const stage =
     PortfolioHistoryContactModule,
     PortfolioHistoryEducationModule,
     PortfolioHistoryAwardModule,
-    PortfolioHistoryAwardSubtitleModule,
-    PortfolioHistoryAwardSubtitleValueModule,
     PortfolioHistoryExhibitionModule,
+    PortfolioHistoryEtcModule,
     FileModule,
   ],
   controllers: [AppController],

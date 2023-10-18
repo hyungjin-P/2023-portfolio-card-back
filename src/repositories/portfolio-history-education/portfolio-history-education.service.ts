@@ -1,4 +1,4 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
+import { ConsoleLogger, HttpException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
   PortfolioHistoryEducation,
@@ -32,7 +32,7 @@ export class PortfolioHistoryEducationService {
   }
 
   async getDataByPortfolioHistoryId(historyId: string): Promise<PortfolioHistoryEducation[]>{
-    const educationList: PortfolioHistoryEducation[] = await this.educationRepository.find({
+    const educations: PortfolioHistoryEducation[] = await this.educationRepository.find({
       where: {
         portfolioHistoryId: historyId,
       },
@@ -42,16 +42,25 @@ export class PortfolioHistoryEducationService {
         },
       },
       order: {
-        createdAt: 'DESC',
+        createdAt: 'ASC',
       }
     });
 
-    return educationList;
+    if(!educations){
+      throw new HttpException(
+        {
+          message: '학력정보 오류 발생!',
+        },
+        500,
+      );
+    }
+
+    return educations;
   }
 
   async saveData(historyId, saveList: PortfolioHistoryEducation[]): Promise<PortfolioHistoryEducation[]> {
     saveList.map(async (block)=>{
-      if(block.id.length > 5){
+      if(block.id.length > 5){ // 기존 저장 정보 수정
         await this.educationSubtitleRepository.save({
           id: block.subtitles[0].id,
           subtitle: block.subtitles[0].subtitle,
@@ -60,7 +69,7 @@ export class PortfolioHistoryEducationService {
           id: block.subtitles[0].values[0].id,
           value: block.subtitles[0].values[0].value,
         })
-      }else{
+      }else{ // 신규 저장 정보
         const savedEducation: PortfolioHistoryEducation = await this.educationRepository.save({
           portfolioHistoryId: historyId,
           title: 'none title content',

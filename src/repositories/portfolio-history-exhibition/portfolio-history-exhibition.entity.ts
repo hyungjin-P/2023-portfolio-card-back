@@ -35,7 +35,7 @@ export class PortfolioHistoryExhibitionSubtitle extends CommonEntity {
 @Entity('portfolio_history_exhibition_subtitle_value')
 export class PortfolioHistoryExhibitionSubtitleValue extends CommonEntity {
   @Column()
-  portfolioHistoryExhibitionSubtitleId: number;
+  portfolioHistoryExhibitionSubtitleId: string;
 
   @Column({nullable: true})
   value: string;
