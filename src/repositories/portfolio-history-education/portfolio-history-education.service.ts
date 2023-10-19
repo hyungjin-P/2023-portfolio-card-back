@@ -43,6 +43,12 @@ export class PortfolioHistoryEducationService {
       },
       order: {
         createdAt: 'ASC',
+        subtitles: {
+          createdAt: 'ASC',
+          values: {
+            createdAt: 'ASC',
+          }
+        }
       }
     });
 

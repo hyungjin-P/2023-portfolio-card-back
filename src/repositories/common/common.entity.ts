@@ -1,16 +1,16 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 /** @description 엔티티 공통 베이스 */
 export class CommonEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ default: ()=>'CURRENT_TIMESTAMP(0)', type: 'timestamp without time zone' })
+  @CreateDateColumn({ default: ()=>'CURRENT_TIMESTAMP(0)', type: 'timestamp without time zone' })
   createdAt: Date;
 
-  @Column({ default: ()=>'CURRENT_TIMESTAMP(0)', type: 'timestamp without time zone'  })
+  @UpdateDateColumn({ default: ()=>'CURRENT_TIMESTAMP(0)', type: 'timestamp without time zone'  })
   updatedAt: Date;
 
-  @Column({nullable: true})
+  @DeleteDateColumn({nullable: true})
   deletedAt: Date;
 }

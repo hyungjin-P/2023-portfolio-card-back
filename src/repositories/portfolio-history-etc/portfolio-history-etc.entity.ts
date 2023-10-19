@@ -9,8 +9,8 @@ export class PortfolioHistoryEtc extends CommonEntity {
   @Column({nullable: true})
   title: string;
 
-  @ManyToOne(()=>PortfolioHistoryEtcSubtitle,
-    (entity)=>entity.etc)
+  @OneToMany(()=>PortfolioHistoryEtcSubtitle,
+    (entity)=>entity.portfolioHistoryEtc)
   subtitles: PortfolioHistoryEtcSubtitle[];
 }
 
@@ -24,10 +24,10 @@ export class PortfolioHistoryEtcSubtitle extends CommonEntity {
 
   @ManyToOne(()=>PortfolioHistoryEtc,
     (entity)=>entity.subtitles)
-  etc: PortfolioHistoryEtc;
+  portfolioHistoryEtc: PortfolioHistoryEtc;
 
   @OneToMany(()=>PortfolioHistoryEtcSubtitleValue,
-    (entity)=>entity.etcSubtitle)
+    (entity)=>entity.portfolioHistoryEtcSubtitle)
   values: PortfolioHistoryEtcSubtitleValue[];
 }
 
@@ -41,6 +41,6 @@ export class PortfolioHistoryEtcSubtitleValue extends CommonEntity {
 
   @ManyToOne(()=>PortfolioHistoryEtcSubtitle,
     (entity)=>entity.values)
-  etcSubtitle: PortfolioHistoryEtcSubtitle;
+  portfolioHistoryEtcSubtitle: PortfolioHistoryEtcSubtitle;
 }
 

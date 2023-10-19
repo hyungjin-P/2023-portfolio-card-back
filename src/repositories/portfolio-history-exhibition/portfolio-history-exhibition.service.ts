@@ -26,6 +26,12 @@ export class PortfolioHistoryExhibitionService {
       },
       order: {
         createdAt: 'ASC',
+        subtitles: {
+          createdAt: 'ASC',
+          values: {
+            createdAt: 'ASC',
+          }
+        }
       }
     });
 
@@ -69,7 +75,7 @@ export class PortfolioHistoryExhibitionService {
             })
           }else{
             const savedSubtitle: PortfolioHistoryExhibitionSubtitle = await this.exhibitionSubtitleRepository.save({
-              portfolioHistoryAwardId: exhibitionId,
+              portfolioHistoryExhibitionId: exhibitionId,
               subtitle: subtitle.subtitle,
             })
             subtitleId = savedSubtitle.id;
@@ -94,5 +100,17 @@ export class PortfolioHistoryExhibitionService {
       }
     })
     return await this.getDataByPortfolioHistoryId(historyId);
+  }
+
+  async deleteById(id: string){
+    return await this.exhibitionRepository.softDelete(id);
+  }
+
+  async deleteSubtitleById(id: string){
+    return await this.exhibitionSubtitleRepository.softDelete(id);
+  }
+
+  async deleteValueById(id: string){
+    return await this.exhibitionSubtitleValueRepository.softDelete(id);
   }
 }

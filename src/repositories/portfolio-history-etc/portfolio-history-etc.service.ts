@@ -3,8 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import {
   PortfolioHistoryEtc,
-  PortfolioHistoryEtcSubtitle, PortfolioHistoryEtcSubtitleValue
-} from "../portfolio-history-etc/portfolio-history-etc.entity";
+  PortfolioHistoryEtcSubtitle,
+  PortfolioHistoryEtcSubtitleValue
+} from "./portfolio-history-etc.entity";
 
 @Injectable()
 export class PortfolioHistoryEtcService {
@@ -30,6 +31,12 @@ export class PortfolioHistoryEtcService {
       },
       order: {
         createdAt: 'ASC',
+        subtitles: {
+          createdAt: 'ASC',
+          values: {
+            createdAt: 'ASC',
+          }
+        }
       }
     });
 
@@ -75,7 +82,8 @@ export class PortfolioHistoryEtcService {
             const savedSubtitle: PortfolioHistoryEtcSubtitle = await this.etcSubtitleRepository.save({
               portfolioHistoryEtcId: etcId,
               subtitle: subtitle.subtitle,
-            })
+            });
+
             subtitleId = savedSubtitle.id;
           }
 
@@ -88,7 +96,7 @@ export class PortfolioHistoryEtcService {
                 });
               }else{
                 await this.etcSubtitleValueRepository.save({
-                  portfolioHistoryExhibitionSubtitleId: subtitleId,
+                  portfolioHistoryEtcSubtitleId: subtitleId,
                   value: value.value,
                 });
               }
@@ -98,5 +106,17 @@ export class PortfolioHistoryEtcService {
       }
     })
     return await this.getDataByPortfolioHistoryId(historyId);
+  }
+
+  async deleteById(id: string){
+    return await this.etcRepository.softDelete(id);
+  }
+
+  async deleteSubtitleById(id: string){
+    return await this.etcSubtitleRepository.softDelete(id);
+  }
+
+  async deleteValueById(id: string){
+    return await this.etcSubtitleValueRepository.softDelete(id);
   }
 }

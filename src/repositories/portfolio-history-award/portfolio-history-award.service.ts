@@ -31,6 +31,12 @@ export class PortfolioHistoryAwardService {
       },
       order: {
         createdAt: 'ASC',
+        subtitles: {
+          createdAt: 'ASC',
+          values: {
+            createdAt: 'ASC',
+          }
+        }
       }
     });
 
@@ -89,7 +95,7 @@ export class PortfolioHistoryAwardService {
                 });
               }else{
                 await this.awardSubtitleValueRepository.save({
-                  portfolioHistoryExhibitionSubtitleId: subtitleId,
+                  portfolioHistoryAwardSubtitleId: subtitleId,
                   value: value.value,
                 });
               }
