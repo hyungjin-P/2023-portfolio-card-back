@@ -3,6 +3,10 @@ import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { Portfolio } from '../portfolio/portfolio.entity';
 import { PortfolioHistoryGeneral } from "../portfolio-history-general/portfolio-history-general.entity";
 import { PortfolioHistoryContact } from "../portfolio-history-contact/portfolio-history-contact.entity";
+import { PortfolioHistoryEducation } from "../portfolio-history-education/portfolio-history-education.entity";
+import { PortfolioHistoryExhibition } from "../portfolio-history-exhibition/portfolio-history-exhibition.entity";
+import { PortfolioHistoryAward } from "../portfolio-history-award/portfolio-history-award.entity";
+import { PortfolioHistoryEtc } from "../portfolio-history-etc/portfolio-history-etc.entity";
 
 @Entity('portfolio_history')
 export class PortfolioHistory extends CommonEntity {
@@ -34,4 +38,16 @@ export class PortfolioHistory extends CommonEntity {
 
   @OneToMany(() => PortfolioHistoryContact, (entity)=> entity.portfolioHistory)
   portfolioHistoryContacts: PortfolioHistoryContact[];
+
+  @OneToMany(()=> PortfolioHistoryEducation, (entity)=> entity.portfolioHistory)
+  portfolioHistoryEducations: PortfolioHistoryEducation[];
+
+  @OneToMany(()=> PortfolioHistoryExhibition, (entity)=> entity.portfolioHistory)
+  portfolioHistoryExhibitions: PortfolioHistoryExhibition[];
+
+  @OneToMany(()=> PortfolioHistoryAward, (entity)=> entity.portfolioHistory)
+  portfolioHistoryAwards: PortfolioHistoryAward[];
+
+  @OneToMany(()=> PortfolioHistoryEtc, (entity)=> entity.portfolioHistory)
+  portfolioHistoryEtc: PortfolioHistoryEtc[];
 }

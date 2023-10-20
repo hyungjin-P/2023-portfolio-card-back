@@ -104,8 +104,15 @@ export class PortfolioHistoryEtcService {
           }
         })
       }
-    })
+    });
+
+    await this.delay(200);
+
     return await this.getDataByPortfolioHistoryId(historyId);
+  }
+
+  delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
   }
 
   async deleteById(id: string){

@@ -78,7 +78,7 @@ export class PortfolioHistoryEducationService {
       }else{ // 신규 저장 정보
         const savedEducation: PortfolioHistoryEducation = await this.educationRepository.save({
           portfolioHistoryId: historyId,
-          title: 'none title content',
+          title: '',
         });
 
         const savedEducationSubtitle: PortfolioHistoryEducationSubtitle = await this.educationSubtitleRepository.save({
@@ -94,6 +94,24 @@ export class PortfolioHistoryEducationService {
       }
     });
 
+    await this.delay(200);
+
     return await this.getDataByPortfolioHistoryId(historyId);
+  }
+
+  delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
+
+  async deleteById(id: string){
+    return await this.educationRepository.softDelete(id);
+  }
+
+  async deleteSubtitleById(id: string){
+    return await this.educationSubtitleRepository.softDelete(id);
+  }
+
+  async deleteValueById(id: string){
+    return await this.educationSubtitleValueRepository.softDelete(id);
   }
 }

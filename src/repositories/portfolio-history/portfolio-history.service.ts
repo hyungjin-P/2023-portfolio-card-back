@@ -29,9 +29,16 @@ export class PortfolioHistoryService {
       relations: {
         portfolioHistoryGenerals: true,
         portfolioHistoryContacts: true,
+        portfolioHistoryEducations: { subtitles: { values:true } },
+        portfolioHistoryExhibitions: { subtitles: { values:true } },
+        portfolioHistoryAwards: { subtitles: { values:true } },
+        portfolioHistoryEtc: { subtitles: { values:true } },
       },
       order: {
-
+        portfolioHistoryEducations: {createdAt: 'ASC', subtitles: {createdAt: 'ASC', values: {createdAt: 'ASC'}}},
+        portfolioHistoryExhibitions: {createdAt: 'ASC', subtitles: {createdAt: 'ASC', values: {createdAt: 'ASC'}}},
+        portfolioHistoryAwards: {createdAt: 'ASC', subtitles: {createdAt: 'ASC', values: {createdAt: 'ASC'}}},
+        portfolioHistoryEtc: {createdAt: 'ASC', subtitles: {createdAt: 'ASC', values: {createdAt: 'ASC'}}},
       }
     });
   }

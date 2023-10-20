@@ -1,5 +1,6 @@
 import { CommonEntity } from '../common/common.entity';
 import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
+import { PortfolioHistory } from "../portfolio-history/portfolio-history.entity";
 
 @Entity('portfolio_history_award')
 export class PortfolioHistoryAward extends CommonEntity {
@@ -13,6 +14,9 @@ export class PortfolioHistoryAward extends CommonEntity {
   @OneToMany(()=>PortfolioHistoryAwardSubtitle,
     (entity)=> entity.portfolioHistoryAward)
   subtitles: PortfolioHistoryAwardSubtitle[];
+
+  @ManyToOne(()=>PortfolioHistory, (entity)=> entity.portfolioHistoryAwards)
+  portfolioHistory: PortfolioHistory;
 }
 
 @Entity('portfolio_history_award_subtitle')

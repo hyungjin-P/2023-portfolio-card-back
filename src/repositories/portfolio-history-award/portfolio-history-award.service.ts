@@ -103,7 +103,26 @@ export class PortfolioHistoryAwardService {
           }
         })
       }
-    })
+    });
+
+    await this.delay(200);
+
     return await this.getDataByPortfolioHistoryId(historyId);
+  }
+
+  delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
+
+  async deleteById(id: string){
+    return await this.awardRepository.softDelete(id);
+  }
+
+  async deleteSubtitleById(id: string){
+    return await this.awardSubtitleRepository.softDelete(id);
+  }
+
+  async deleteValueById(id: string){
+    return await this.awardSubtitleValueRepository.softDelete(id);
   }
 }

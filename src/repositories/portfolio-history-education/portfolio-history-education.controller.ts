@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Query } from "@nestjs/common";
 import { PortfolioHistoryEducationService } from "./portfolio-history-education.service";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { PortfolioHistoryEducation } from "./portfolio-history-education.entity";
@@ -39,5 +39,32 @@ export class PortfolioHistoryEducationController {
     @Body() saveList: PortfolioHistoryEducation[],
   ): Promise<PortfolioHistoryEducation[]>{
     return await this.service.saveData(historyId, saveList);
+  }
+
+  @Delete('/delete')
+  @ApiOperation({
+    summary: '학력 정보 삭제',
+    description: '학력 정보 소프트 삭제'
+  })
+  async delete(@Query('id') id: string){
+    return await this.service.deleteById(id);
+  }
+
+  @Delete('/deleteSubtitle')
+  @ApiOperation({
+    summary: '학력 년도 삭제',
+    description: '학력 년도 소프트 삭제'
+  })
+  async deleteSubtitle(@Query('id') id: string){
+    return await this.service.deleteSubtitleById(id);
+  }
+
+  @Delete('/deleteValue')
+  @ApiOperation({
+    summary: '학력 내용 삭제',
+    description: '학력 내용 소프트 삭제'
+  })
+  async deleteValue(@Query('id') id: string){
+    return await this.service.deleteValueById(id);
   }
 }
