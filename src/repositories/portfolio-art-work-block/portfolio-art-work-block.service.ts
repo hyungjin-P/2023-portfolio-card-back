@@ -4,14 +4,15 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PortfolioArtWorkBlockCreateDto } from "./dto/portfolio-art-work-block-create.dto";
 import { PortfolioArtWorkBlockSaveDto } from "./dto/portfolio-art-work-block-save.dto";
-import { PortfolioArtWorkPicture } from "../portfolio-art-work-picture/portfolio-art-work-picture.entity";
+import { PortfolioArtWorkPictureService } from "../portfolio-art-work-picture/portfolio-art-work-picture.service";
+
 
 @Injectable()
 export class PortfolioArtWorkBlockService {
   constructor(
     @InjectRepository(PortfolioArtWorkBlock)
     private portfolioArtWorkBlockRepository: Repository<PortfolioArtWorkBlock>,
-    // private portfolioArtWorkBlockPictureRepository: Repository<PortfolioArtWorkPicture>
+    private portfolioArtWorkBlockPictureService: PortfolioArtWorkPictureService,
   ) {
   }
 
@@ -65,6 +66,8 @@ export class PortfolioArtWorkBlockService {
   }
 
   async deletePortfolioArtWorkBlock(id: string) {
+    await this.portfolioArtWorkBlockPictureService.deletePortfolioArtWorkPictureByBlockId(id);
+
     return await this.portfolioArtWorkBlockRepository.delete(id);
   }
 }

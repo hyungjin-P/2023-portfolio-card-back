@@ -39,4 +39,14 @@ export class PortfolioArtWorkPictureService {
 
     return modifyPictures;
   }
+
+  async deletePortfolioArtWorkPictureDelete(id: string){
+    await this.portfolioArtWorkPicture.delete(id);
+  }
+
+  async deletePortfolioArtWorkPictureByBlockId(blockId: string){
+    await this.portfolioArtWorkPicture.delete({
+      portfolioArtWorkBlockId: blockId,
+    });
+  }
 }

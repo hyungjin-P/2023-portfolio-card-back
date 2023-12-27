@@ -1,9 +1,8 @@
-import { Body, Controller, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { PortfolioArtWorkPictureService } from "./portfolio-art-work-picture.service";
 import { PortfolioArtWorkPictureModifySortDto } from "./dto/portfolio-art-work-picture-modify-sort.dto";
 import { PortfolioArtWorkPicture } from "./portfolio-art-work-picture.entity";
-import { setTSInstanceInCache } from "ts-loader/dist/instance-cache";
 import { PortfolioArtWorkPictureSaveDto } from "./dto/portfolio-art-work-picture-save.dto";
 
 @Controller('portfolio-art-work-picture')
@@ -21,14 +20,24 @@ export class PortfolioArtWorkPictureController {
     return await this.portfolioArtWorkPictureService.createPortfolioArtWorkPicture(picturesInfo);
   }
 
-  @Post('modifySortByIdDto')
+  @Post('/modifySortByIdDto')
   @ApiOperation({
-    summary: '포트폴리오 메인 사진 수정',
+    summary: '포트폴리오 작품 순서 변경',
   })
   async modifyPortfolioArtWorkPictureSortByIdDto(
     @Body() modifySortDto: PortfolioArtWorkPictureModifySortDto[],
   ): Promise<PortfolioArtWorkPicture[]>{
     return await this.portfolioArtWorkPictureService.modifyPortfolioArtWorkPictureSortByIdDto(modifySortDto);
+  }
+
+  @Delete('/delete')
+  @ApiOperation({
+    summary: '포트폴이로 작품 사진 삭제'
+  })
+  async deletePictureById(
+    @Query('id') id: string,
+  ){
+    await this.portfolioArtWorkPictureService.deletePortfolioArtWorkPictureDelete(id);
   }
 
 }
