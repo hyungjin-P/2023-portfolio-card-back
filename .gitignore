@@ -35,3 +35,12 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 package-lock.json
+
+# secrets (portfolio/mock: 추적 해제, 더미는 config/.env.example)
+/config/.env.*
+!/config/.env.example
+/src/serviceAccountKey.json
+/crackit-portfolio
+
+# mock runtime (업로드·egress 기록)
+/.mock/
