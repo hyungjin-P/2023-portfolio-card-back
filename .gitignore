@@ -34,7 +34,6 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-package-lock.json
 
 # secrets (portfolio/mock: 추적 해제, 더미는 config/.env.example)
 /config/.env.*
