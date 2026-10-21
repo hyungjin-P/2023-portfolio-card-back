@@ -1,7 +1,7 @@
-# 목업 모드 실행 안내 (`portfolio/mock`)
+# 목업 모드 실행 안내 (`portfolio/mock` — 공개본에서는 `main`)
 
 크래킷 포트폴리오 카드 백엔드(NestJS 10 + TypeORM 0.3 + PostgreSQL)를 **AWS S3·운영 DB·외부 네트워크 없이** 로컬에서 띄우는 목업 층입니다.
-원본 소스(`src/`)는 고치지 않았습니다. 목업 코드는 모두 repo 루트 `_mock/`에 있고 `MOCK=1`로 켭니다.
+목업 층은 원본 소스(`src/`)를 고치지 않았습니다(공개본에서 한 값 치환은 별개 — README "공개본에서 바꾼 것"). 목업 코드는 모두 repo 루트 `_mock/`에 있고 `MOCK=1`로 켭니다.
 목업은 원본 빌드 산출물 `dist/main.js`를 그대로 실행하고, `node --require ./_mock/preload.js`로 경계 세 곳(S3 업로드·외부 연결·목업 전용 경로)만 바꿉니다.
 `MOCK=1`이 없으면 preload는 아무것도 하지 않으며, 원본 빌드 산출물은 목업 층 추가 전과 SHA256이 같습니다.
 
@@ -61,7 +61,7 @@ npm run mock:start     # = cross-env MOCK=1 NODE_ENV=development node --require 
 
 ## 3. 원본 대비 변경 목록
 
-`git diff e91c76b..portfolio/mock` (`e91c76b` = 원본 `master` HEAD)
+`git diff 673790e..main` (`673790e` = 원본 `master` HEAD `e91c76b` 의 공개본 해시. 공개본 `main` 에는 여기에 공개본 전용 커밋 3개(MOCK.md 정정·README·`docs/`)가 더해져 있다. 그 3개를 빼려면 `..d56d0f3`(= 원본 `portfolio/mock` `4ed9f31` 의 공개본 해시)로 끝낸다)
 
 | 파일 | 변경 |
 |---|---|
@@ -70,11 +70,12 @@ npm run mock:start     # = cross-env MOCK=1 NODE_ENV=development node --require 
 | `package-lock.json` | **추적 시작** — 원본 로컬 lock(v3, 2023-12-26, 마지막 커밋 이전 → 당시 생성 추정)을 그대로 넣었다. git이 CRLF→LF로만 정규화 |
 | `.nvmrc` | **추가** — `18.20.8` |
 | `config/.env.example` | **추가** — 더미 값(코드가 읽는 키 11개 + 목업 표지 `MOCK_ENV_EXAMPLE=1`) |
-| `config/.env.development`, `config/.env.production`, `src/serviceAccountKey.json`, `crackit-portfolio` | git **추적 해제**(비밀 파일. 원본 히스토리에는 남아 있다) |
+| `config/.env.development`, `config/.env.production`, `src/serviceAccountKey.json`, `crackit-portfolio` | 공개본에서는 **히스토리 전체에서 경로째 제거**했다(원본 `portfolio/mock` 에서는 git 추적 해제였고 원본 히스토리에는 남아 있다). 위 diff 에 나오지 않는다 |
 | `.gitignore` | 위 비밀 파일 4종(`/config/.env.*` + `!/config/.env.example`)·`/.mock/` 추가, `package-lock.json` 줄 제거 |
 | `.dockerignore` | `config/.env.*`·`src/serviceAccountKey.json`·`crackit-portfolio`·`_mock`·`.mock` 추가 — 원본 `Dockerfile`의 `COPY . .`가 더는 env 파일을 이미지에 넣지 않는다 |
 | `MOCK.md` | 이 문서 |
-| 원본 소스(`src/**`, `views/`, `public/`, 설정 파일) | **변경 없음** |
+| `README.md`·`docs/` | 공개본 전용 — README 는 Nest CLI 기본 문서를 대체하고, `docs/` 는 Stage 3 산출물(캡처·openapi.json·요청 예시)이다 |
+| 원본 소스(`src/**`, `views/`, `public/`, 설정 파일) | **변경 없음** — 공개본의 값 치환은 히스토리 전체에 적용돼 있어 위 diff 는 치환된 상태끼리의 비교다 |
 
 버전 업그레이드와 의존성 교체는 **없습니다**.
 
@@ -105,7 +106,7 @@ npm run start:prod     # = node dist/main — 실제 DB 접속 정보가 필요�
 
 ## 6. 알려진 제약
 
-- 업로드 API 응답과 DB의 `url`은 원본 코드가 만든 **실제 S3 주소**(`https://REDACTED_S3_BUCKET.s3.ap-northeast-2.amazonaws.com/…`, `file.service.ts:53,120`)입니다. 서버는 그 주소로 연결하지 않지만, 브라우저가 이 URL을 열면 외부로 나갑니다. 파일은 `/_mock/uploads/<버킷>/<키>`로 봅니다.
+- 업로드 API 응답과 DB의 `url`은 원본 코드가 만든 **S3 형식 주소**(공개본에서는 버킷 이름이 자리표시자라 실재하는 버킷이 아니다. `https://REDACTED_S3_BUCKET.s3.ap-northeast-2.amazonaws.com/…`, `file.service.ts:53,120`)입니다. 서버는 그 주소로 연결하지 않지만, 브라우저가 이 URL을 열면 외부로 나갑니다. 파일은 `/_mock/uploads/<버킷>/<키>`로 봅니다.
 - 안내 페이지 `GET /`의 HTML은 Bootstrap을 jsDelivr CDN에서 불러옵니다(`views/index.hbs`, 원본 그대로). 서버 요청이 아니라 브라우저 요청이라 목업 범위 밖입니다. Swagger UI(`/api-docs`)는 외부 요청이 없습니다.
 - 원본 결함은 고치지 않았습니다. 예: `POST /portfolio-main-visual/saveAndInItem`에 `portfolioMainVisualTags`가 없으면 500(`savedPortfolioMainVisualTags is not iterable`), `GET /portfolio-art-work-block/getBlocksByArtWorkId`는 쿼리 객체 전체를 uuid 자리에 넣어 500.
 - 쓰기 API의 결과는 DB에 남습니다. `npm run mock:seed`로 초기 상태로 돌립니다. DB·role을 지우려면 `npm run mock:db -- --drop`.
