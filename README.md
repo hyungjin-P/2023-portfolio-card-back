@@ -90,6 +90,30 @@ npm run mock:start   # http://127.0.0.1:3000/api-docs
 - **작성자**: 내 이름 변형(`JinGureum`·`Hyungjin`)은 `JinGureum` 하나로 합치고, 동료 커밋은 이름만 남기고 이메일을 지웠다.
 - 남긴 것: 서비스 이름(Swagger 제목, 업로드 키 경로의 서비스명), DB 스키마 이름이 든 구버전 설계 문서(`ddl/`, UML 텍스트).
 
+## 화면·API (목업 모드 캡처)
+
+`docs/` 에 Swagger UI 캡처 11장(1440 폭), OpenAPI 명세 [`docs/openapi.json`](docs/openapi.json)(operation 66), 대표 요청·응답 3건이 있다. 캡처의 "(가림: …)" 는 Swagger 예시값에 있던 식별자·계정 정보를 촬영할 때 화면에서 가린 것이다. 빨간 점선 배지는 원본의 알려진 결함·한계 표기이고, 파란 점선은 캡처 주석이다(둘 다 촬영 스크립트가 붙였다).
+
+| 화면 | 보여 주는 것 |
+|---|---|
+| [01](docs/screens/01-swagger-overview-1440.png) | 전체 개요 — 태그 17개 |
+| [02](docs/screens/02-tag-history-core-1440.png) | 이력 진입 API — get-or-create 묶음 |
+| [03](docs/screens/03-tag-history-areas-1440.png) | 학력·수상·전시·기타 4영역의 동일한 구조 (`delay(200)` 한계 배지) |
+| [04](docs/screens/04-tag-author-1440.png) | 작가 API 10개 (평문 비밀번호 반환 결함 배지) |
+| [05](docs/screens/05-tag-artwork-1440.png) | 작품·블록·사진 API 10개 |
+| [06](docs/screens/06-tag-portfolio-mainvisual-1440.png) | 포트폴리오·대표화면·태그·테마 API 13개 |
+| [07](docs/screens/07-tag-file-default-1440.png) | 파일 업로드 API 2개 |
+| [08](docs/screens/08-try-history-getall-1440.png) | Try it out — 이력 3계층 일괄 조회 (200) |
+| [09](docs/screens/09-try-history-create-1440.png) | Try it out — 이력 get-or-create ×2, 같은 id |
+| [10](docs/screens/10-try-award-savedata-1440.png) | Try it out — 수상 저장: 임시 id → UUID, 저장 후 재조회 응답 |
+| [11](docs/screens/11-try-award-deletevalue-1440.png) | Try it out — 계층 단위 소프트 삭제 (`affected: 1`) |
+
+| 대표 요청·응답 | 내용 |
+|---|---|
+| [01-history-getall](docs/api-examples/01-history-getall.txt) | 이력 6영역 + 3계층 일괄 조회, 층별 `createdAt` 오름차순 |
+| [02-history-get-or-create](docs/api-examples/02-history-get-or-create.txt) | 있을 때·없을 때 두 번 불러도 같은 이력 |
+| [03-award-savedata-softdelete](docs/api-examples/03-award-savedata-softdelete.txt) | 임시 id → UUID 재조회, 소프트 삭제 후 DB 행 확인 |
+
 ## 라이선스
 
 All rights reserved — 포트폴리오 열람용

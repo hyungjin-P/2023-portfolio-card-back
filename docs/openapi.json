@@ -1,0 +1,2031 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "API 문서 뷰"
+        ]
+      }
+    },
+    "/author/getAll": {
+      "get": {
+        "operationId": "AuthorController_getAll",
+        "summary": "사용자 정보 전체 조회",
+        "description": "사용자 정보 전체 조회",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "사용자 정보를 전체조회 한다.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/create": {
+      "post": {
+        "operationId": "AuthorController_createAuthor",
+        "summary": "사용자 추가",
+        "description": "사용자 추가",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "사용자 추가",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/joinAuthor": {
+      "post": {
+        "operationId": "AuthorController_joinAuthor",
+        "summary": "사용자 회원 가입 완료",
+        "description": "임시 주소 발급한 회원 대상으로 회원가입을 진행한다.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorJoinDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "사용자 회원 가입 완료",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorJoinDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/createTempAuthor": {
+      "post": {
+        "operationId": "AuthorController_createTempAuthor",
+        "summary": "사용자 임시 주소 만들기",
+        "description": "회원 가입 중 도메인 뒤에 붙는 임시 주소 만들기",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorTempDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "사용자 추가, 임시 데이터",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/loginAuthor": {
+      "post": {
+        "operationId": "AuthorController_loginAuthor",
+        "summary": "로그인",
+        "description": "사용자 링크 (authorLink), 비밀번호로 로그인",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorLoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "결과 => Author\n\n 사용자를 리턴함.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/isDuplicateAuthorLink": {
+      "get": {
+        "operationId": "AuthorController_isDuplicateAuthorLink",
+        "summary": "사용자 url 중복체크",
+        "description": "사용자 url 중복 체크\n\n__true__ => _중복_, __false__ => _사용가능_",
+        "parameters": [
+          {
+            "name": "authorLink",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/isDuplicateEmail": {
+      "get": {
+        "operationId": "AuthorController_isDuplicateEmail",
+        "summary": "이메일 중복체크",
+        "description": "이메일 중복 체크\n\n__true__ => _중복_, __false__ => _사용가능_",
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/modify": {
+      "patch": {
+        "operationId": "AuthorController_modifyAuthor",
+        "summary": "사용자 수정",
+        "description": "사용자 수정",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "사용자 수정, 임시 데이터",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/delete": {
+      "delete": {
+        "operationId": "AuthorController_deleteAuthor",
+        "summary": "사용자 삭제",
+        "description": "사용자 삭제",
+        "parameters": [
+          {
+            "name": "authorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "사용자 삭제, 임시 데이터"
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/author/getAuthorByAuthorLink": {
+      "get": {
+        "operationId": "AuthorController_findAuthorIdByAuthorLink",
+        "summary": "사용자 정보를 링크로 조회",
+        "description": "사용자 정보를 링크로 조회",
+        "parameters": [
+          {
+            "name": "authorLink",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "사용자 정보를 링크로 조회한다.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "사용자"
+        ]
+      }
+    },
+    "/portfolio/create": {
+      "post": {
+        "operationId": "PortfolioController_createPortfolio",
+        "summary": "포트폴리오 추가",
+        "description": "포트폴리오 추가",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Portfolio"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "포트폴리오 추가",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "authorId": "사용자 id",
+                    "title": "포트폴리오 타이틀",
+                    "description": "포트폴리오 내용"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "포트폴리오"
+        ]
+      }
+    },
+    "/portfolio/createNewPortfolio": {
+      "post": {
+        "operationId": "PortfolioController_createNewPortfolio",
+        "summary": "포트폴리오 없는지 검사 후 없으면 새로 생성",
+        "description": "포트폴리오가 없으면 새로 생성, 있으면 기존 생성된 내용 중 최근 1건 리턴",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioCreateNewPortfolioDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "포트폴리오 추가",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "authorId": "사용자 id",
+                    "title": "포트폴리오 타이틀",
+                    "description": "포트폴리오 내용"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "포트폴리오"
+        ]
+      }
+    },
+    "/portfolio-main-visual/create": {
+      "post": {
+        "operationId": "PortfolioMainVisualController_savePortfolioMainVisual",
+        "summary": "포트폴리오 메인 비주얼 추가",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioMainVisualEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼"
+        ]
+      }
+    },
+    "/portfolio-main-visual/getAll": {
+      "get": {
+        "operationId": "PortfolioMainVisualController_getAll",
+        "summary": "포트폴리오 메인 비주얼 전체 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼"
+        ]
+      }
+    },
+    "/portfolio-main-visual/findOne": {
+      "get": {
+        "operationId": "PortfolioMainVisualController_findOne",
+        "summary": "포트폴리오 해당 1건 조회",
+        "description": "__샘플 ID__\n\nsample ID : 6ae6d61e-4462-4412-9ecd-394b24575795\n\nsample ID : 6ae6d61e-4462-4412-9ecd-394b24575795",
+        "parameters": [
+          {
+            "name": "portfolioId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼"
+        ]
+      }
+    },
+    "/portfolio-main-visual/saveAndInItem": {
+      "post": {
+        "operationId": "PortfolioMainVisualController_savePortfolioMainVisualInItem",
+        "summary": "포트폴리오 메인 비주얼, 태그, 테마 저장",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioMainVisualSaveInItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼"
+        ]
+      }
+    },
+    "/portfolio-main-visual-theme/create": {
+      "post": {
+        "operationId": "PortfolioMainVisualThemeController_create",
+        "summary": "포트폴리오 메인비주얼 테마 추가",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioMainVisualThemeEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 테마"
+        ]
+      }
+    },
+    "/portfolio-main-visual-theme/getAll": {
+      "get": {
+        "operationId": "PortfolioMainVisualThemeController_getAll",
+        "summary": "포트폴리오 메인비주얼 테마 전체 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 테마"
+        ]
+      }
+    },
+    "/portfolio-main-visual-theme/getOneByRecently": {
+      "get": {
+        "operationId": "PortfolioMainVisualThemeController_findOneByRecent",
+        "summary": "포트폴리오 메인비주얼 최근 것 1개 조회",
+        "parameters": [
+          {
+            "name": "portfolioMainVisualId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 테마"
+        ]
+      }
+    },
+    "/portfolio-main-visual-theme/remove": {
+      "delete": {
+        "operationId": "PortfolioMainVisualThemeController_remove",
+        "summary": "포트폴리오 메인비주얼 해당 1건 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 테마"
+        ]
+      }
+    },
+    "/portfolio-main-visual-theme/modify": {
+      "patch": {
+        "operationId": "PortfolioMainVisualThemeController_modify",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioMainVisualThemeEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 테마"
+        ]
+      }
+    },
+    "/portfolio-main-visual-tag/create": {
+      "post": {
+        "operationId": "PortfolioMainVisualTagController_create",
+        "summary": "포트폴리오 메인 비주얼 태그 생성",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioMainVisualTagEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 태그"
+        ]
+      }
+    },
+    "/portfolio-main-visual-tag/remove": {
+      "delete": {
+        "operationId": "PortfolioMainVisualTagController_remove",
+        "summary": "포트폴리오 메인 비주얼 태그 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 메인 비주얼 태그"
+        ]
+      }
+    },
+    "/portfolio-art-work/getAll": {
+      "get": {
+        "operationId": "PortfolioArtWorkController_getAll",
+        "summary": "작품 전체 조회",
+        "description": "모든 사용자 작품 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품"
+        ]
+      }
+    },
+    "/portfolio-art-work/init": {
+      "get": {
+        "operationId": "PortfolioArtWorkController_initArtWork",
+        "summary": "사용자 작품 세팅",
+        "description": "사용자 작품 리턴\n\n이전 진행 중인 작품 리턴, 없으면 새로 생성",
+        "parameters": [
+          {
+            "name": "authorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품"
+        ]
+      }
+    },
+    "/portfolio-art-work-block/getAll": {
+      "get": {
+        "operationId": "PortfolioArtWorkBlockController_getAll",
+        "summary": "포트폴리오 작품 전체 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 블록"
+        ]
+      }
+    },
+    "/portfolio-art-work-block/getBlocksByArtWorkId": {
+      "get": {
+        "operationId": "PortfolioArtWorkBlockController_getBlocksByArtWorkId",
+        "summary": "포트폴리오 작품 불러오기",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 블록"
+        ]
+      }
+    },
+    "/portfolio-art-work-block/create": {
+      "post": {
+        "operationId": "PortfolioArtWorkBlockController_createPortfolioArtWorkBlock",
+        "summary": "포트폴리오 작품 블럭 생성",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioArtWorkBlockCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 블록"
+        ]
+      }
+    },
+    "/portfolio-art-work-block/save": {
+      "post": {
+        "operationId": "PortfolioArtWorkBlockController_savePortfolioArtWorkBlock",
+        "summary": "포트폴리오 작품 블럭 수정",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioArtWorkBlockSaveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 블록"
+        ]
+      }
+    },
+    "/portfolio-art-work-block/delete": {
+      "delete": {
+        "operationId": "PortfolioArtWorkBlockController_deletePortfolioArtWorkBlock",
+        "summary": "포트폴리오 작품 블럭 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 블록"
+        ]
+      }
+    },
+    "/portfolio-art-work-picture/create": {
+      "post": {
+        "operationId": "PortfolioArtWorkPictureController_createPortfolioArtWorkPicture",
+        "summary": "포트폴리오 사진 추가",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioArtWorkPictureSaveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 사진"
+        ]
+      }
+    },
+    "/portfolio-art-work-picture/modifySortByIdDto": {
+      "post": {
+        "operationId": "PortfolioArtWorkPictureController_modifyPortfolioArtWorkPictureSortByIdDto",
+        "summary": "포트폴리오 작품 순서 변경",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 사진"
+        ]
+      }
+    },
+    "/portfolio-art-work-picture/delete": {
+      "delete": {
+        "operationId": "PortfolioArtWorkPictureController_deletePictureById",
+        "summary": "포트폴이로 작품 사진 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 작품 사진"
+        ]
+      }
+    },
+    "/portfolio-history/create": {
+      "post": {
+        "operationId": "PortfolioHistoryController_createPortfolioHistory",
+        "summary": "포트폴리오 작가 정보 생성",
+        "parameters": [
+          {
+            "name": "portfolioId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력"
+        ]
+      }
+    },
+    "/portfolio-history/getAllHistoryByPortfolioId": {
+      "get": {
+        "operationId": "PortfolioHistoryController_getAllHistoryById",
+        "summary": "포트폴리오 아이디로 작가 정보 일괄 조회",
+        "parameters": [
+          {
+            "name": "portfolioId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력"
+        ]
+      }
+    },
+    "/portfolio-history-general/getAll": {
+      "get": {
+        "operationId": "PortfolioHistoryGeneralController_getAllPortfolioGeneral",
+        "summary": "포트폴리오 기본 정보 전체 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기본정보"
+        ]
+      }
+    },
+    "/portfolio-history-general/create": {
+      "post": {
+        "operationId": "PortfolioHistoryGeneralController_createPortfolioGeneral",
+        "summary": "포트폴리오 기본 정보 추가",
+        "parameters": [
+          {
+            "name": "portfolioHistoryId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기본정보"
+        ]
+      }
+    },
+    "/portfolio-history-general/save": {
+      "post": {
+        "operationId": "PortfolioHistoryGeneralController_savePortfolioGeneral",
+        "summary": "포트폴리오 기본 정보 추가",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioHistoryGeneral"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기본정보"
+        ]
+      }
+    },
+    "/portfolio-history-general/delete": {
+      "delete": {
+        "operationId": "PortfolioHistoryGeneralController_deletePortfolioGeneral",
+        "summary": "포트폴리오 기본 정보 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기본정보"
+        ]
+      }
+    },
+    "/portfolio-history-contact/getAll": {
+      "get": {
+        "operationId": "PortfolioHistoryContactController_getAllPortfolioContact",
+        "summary": "포트폴리오 연락처 전체 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 연락처"
+        ]
+      }
+    },
+    "/portfolio-history-contact/create": {
+      "post": {
+        "operationId": "PortfolioHistoryContactController_createPortfolioContact",
+        "summary": "포트폴리오 연락처 추가",
+        "parameters": [
+          {
+            "name": "portfolioHistoryId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 연락처"
+        ]
+      }
+    },
+    "/portfolio-history-contact/save": {
+      "post": {
+        "operationId": "PortfolioHistoryContactController_savePortfolioContact",
+        "summary": "포트폴리오 연락처 수정",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioHistoryContact"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 연락처"
+        ]
+      }
+    },
+    "/portfolio-history-education/getAll": {
+      "get": {
+        "operationId": "PortfolioHistoryEducationController_getAll",
+        "summary": "학력 정보 전체 조회",
+        "description": "모든 이용자 학력 정보 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 학력"
+        ]
+      }
+    },
+    "/portfolio-history-education/getData": {
+      "get": {
+        "operationId": "PortfolioHistoryEducationController_getDataByPortfolioHistoryId",
+        "summary": "학력 정보 조회",
+        "description": "히스토리 아이디로 작가 1인 학력 정보 조회",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 학력"
+        ]
+      }
+    },
+    "/portfolio-history-education/saveData": {
+      "post": {
+        "operationId": "PortfolioHistoryEducationController_saveData",
+        "summary": "학력 정보 저장",
+        "description": "전체 정보를 가져와 학력 아이디 값을 비교 후\n학력 정보를 순차적으로 저장",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 학력"
+        ]
+      }
+    },
+    "/portfolio-history-education/delete": {
+      "delete": {
+        "operationId": "PortfolioHistoryEducationController_delete",
+        "summary": "학력 정보 삭제",
+        "description": "학력 정보 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 학력"
+        ]
+      }
+    },
+    "/portfolio-history-education/deleteSubtitle": {
+      "delete": {
+        "operationId": "PortfolioHistoryEducationController_deleteSubtitle",
+        "summary": "학력 년도 삭제",
+        "description": "학력 년도 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 학력"
+        ]
+      }
+    },
+    "/portfolio-history-education/deleteValue": {
+      "delete": {
+        "operationId": "PortfolioHistoryEducationController_deleteValue",
+        "summary": "학력 내용 삭제",
+        "description": "학력 내용 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 학력"
+        ]
+      }
+    },
+    "/portfolio-history-award/getData": {
+      "get": {
+        "operationId": "PortfolioHistoryAwardController_getDataByPortfolioHistoryId",
+        "summary": "학력 정보 조회",
+        "description": "히스토리 아이디로 작가 1인 수상 정보 조회",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력 > 수상내역"
+        ]
+      }
+    },
+    "/portfolio-history-award/saveData": {
+      "post": {
+        "operationId": "PortfolioHistoryAwardController_saveData",
+        "summary": "수상 정보 저장",
+        "description": "전체 정보를 가져와 수상 아이디 값을 비교 후\n수상 정보를 순차적으로 저장",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력 > 수상내역"
+        ]
+      }
+    },
+    "/portfolio-history-award/delete": {
+      "delete": {
+        "operationId": "PortfolioHistoryAwardController_delete",
+        "summary": "수상 정보 삭제",
+        "description": "수상 정보 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력 > 수상내역"
+        ]
+      }
+    },
+    "/portfolio-history-award/deleteSubtitle": {
+      "delete": {
+        "operationId": "PortfolioHistoryAwardController_deleteSubtitle",
+        "summary": "수상 년도 삭제",
+        "description": "수상 년도 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력 > 수상내역"
+        ]
+      }
+    },
+    "/portfolio-history-award/deleteValue": {
+      "delete": {
+        "operationId": "PortfolioHistoryAwardController_deleteValue",
+        "summary": "수상 내용 삭제",
+        "description": "수상 내용 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "작기이력 > 수상내역"
+        ]
+      }
+    },
+    "/portfolio-history-exhibition/getData": {
+      "get": {
+        "operationId": "PortfolioHistoryExhibitionController_getDataByPortfolioHistoryId",
+        "summary": "전시 정보 조회",
+        "description": "히스토리 아이디로 작가 1인 전시 정보 조회",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 전시 경력"
+        ]
+      }
+    },
+    "/portfolio-history-exhibition/saveData": {
+      "post": {
+        "operationId": "PortfolioHistoryExhibitionController_saveData",
+        "summary": "전시 정보 저장",
+        "description": "전체 정보를 가져와 학력 아이디 값을 비교 후\n전시 정보를 순차적으로 저장",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 전시 경력"
+        ]
+      }
+    },
+    "/portfolio-history-exhibition/delete": {
+      "delete": {
+        "operationId": "PortfolioHistoryExhibitionController_delete",
+        "summary": "전시 정보 삭제",
+        "description": "전시 정보 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 전시 경력"
+        ]
+      }
+    },
+    "/portfolio-history-exhibition/deleteSubtitle": {
+      "delete": {
+        "operationId": "PortfolioHistoryExhibitionController_deleteSubtitle",
+        "summary": "전시 년도 삭제",
+        "description": "전시 년도 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 전시 경력"
+        ]
+      }
+    },
+    "/portfolio-history-exhibition/deleteValue": {
+      "delete": {
+        "operationId": "PortfolioHistoryExhibitionController_deleteValue",
+        "summary": "전시 내용 삭제",
+        "description": "전시 내용 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 전시 경력"
+        ]
+      }
+    },
+    "/portfolio-history-etc/getData": {
+      "get": {
+        "operationId": "PortfolioHistoryEtcController_getDataByPortfolioHistoryId",
+        "summary": "기타 정보 조회",
+        "description": "히스토리 아이디로 작가 1인 기타 정보 조회",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기타 이력"
+        ]
+      }
+    },
+    "/portfolio-history-etc/saveData": {
+      "post": {
+        "operationId": "PortfolioHistoryEtcController_saveData",
+        "summary": "기타 정보 저장",
+        "description": "전체 정보를 가져와 기타 아이디 값을 비교 후\n기타 정보를 순차적으로 저장",
+        "parameters": [
+          {
+            "name": "historyId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기타 이력"
+        ]
+      }
+    },
+    "/portfolio-history-etc/delete": {
+      "delete": {
+        "operationId": "PortfolioHistoryEtcController_delete",
+        "summary": "기타 정보 삭제",
+        "description": "기타 정보 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기타 이력"
+        ]
+      }
+    },
+    "/portfolio-history-etc/deleteSubtitle": {
+      "delete": {
+        "operationId": "PortfolioHistoryEtcController_deleteSubtitle",
+        "summary": "기타 년도 삭제",
+        "description": "기타 년도 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기타 이력"
+        ]
+      }
+    },
+    "/portfolio-history-etc/deleteValue": {
+      "delete": {
+        "operationId": "PortfolioHistoryEtcController_deleteValue",
+        "summary": "기타 내용 삭제",
+        "description": "기타 내용 소프트 삭제",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "포트폴리오 기타 이력"
+        ]
+      }
+    },
+    "/file/uploadFile": {
+      "post": {
+        "operationId": "FileController_uploadFile",
+        "summary": "파일 업로드",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FileSaveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/file/uploadFileOne": {
+      "post": {
+        "operationId": "FileController_uploadFileOne",
+        "summary": "파일 업로드",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FileSaveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Crackit Portfolio API",
+    "description": "Crackit Portfolio API",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "accessToken": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "JWT",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "Author": {
+        "type": "object",
+        "properties": {}
+      },
+      "AuthorJoinDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "서비스 제공자 도메인",
+            "example": "crackit-universe.com"
+          },
+          "authorLink": {
+            "type": "string",
+            "description": "서비스 제공자 도메인",
+            "example": "crackit-universe.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "서비스 제공자 도메인",
+            "example": "flexible"
+          },
+          "email": {
+            "type": "string",
+            "description": "사용자 이메일 (비밀번호 찾기 용도)",
+            "example": "(가림: 동료 이메일)"
+          },
+          "serviceTerm": {
+            "type": "boolean",
+            "description": "서비스 이용약관 동의 여부",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "authorLink",
+          "password",
+          "email",
+          "serviceTerm"
+        ]
+      },
+      "AuthorTempDto": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "서비스 제공자 도메인",
+            "example": "crackit-universe.com"
+          },
+          "authorLink": {
+            "type": "string",
+            "description": "사용자가 사용할 링크",
+            "example": "flexible"
+          }
+        },
+        "required": [
+          "provider",
+          "authorLink"
+        ]
+      },
+      "AuthorLoginDto": {
+        "type": "object",
+        "properties": {
+          "authorLink": {
+            "type": "string",
+            "description": "아이디 (사용자 url)",
+            "example": "flexible"
+          },
+          "password": {
+            "type": "string",
+            "description": "비밀번호",
+            "example": "(가림: 비밀번호 형태 문자열)"
+          }
+        },
+        "required": [
+          "authorLink",
+          "password"
+        ]
+      },
+      "Portfolio": {
+        "type": "object",
+        "properties": {}
+      },
+      "PortfolioCreateNewPortfolioDto": {
+        "type": "object",
+        "properties": {
+          "authorId": {
+            "type": "string",
+            "description": "사용자 row id",
+            "example": "059d702b-73bf-479c-b3ed-8723ee7580b9"
+          }
+        },
+        "required": [
+          "authorId"
+        ]
+      },
+      "PortfolioMainVisualEntityDto": {
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "type": "string",
+            "description": "작성되는 포트폴리오의 id",
+            "default": "6ae6d61e-4462-4412-9ecd-394b24575795"
+          },
+          "name": {
+            "type": "string",
+            "description": "표시되는 닉네임",
+            "default": "PORTFOLIO"
+          },
+          "mainVisualUrl": {
+            "type": "string",
+            "description": "메인 비주얼 이미지 url",
+            "default": "(가림: 외부 이미지 URL)"
+          },
+          "nickName": {
+            "type": "string",
+            "default": "NICKNAME"
+          },
+          "subTitle": {
+            "type": "string",
+            "default": "sub title sub title"
+          }
+        },
+        "required": [
+          "portfolioId",
+          "name",
+          "mainVisualUrl",
+          "nickName",
+          "subTitle"
+        ]
+      },
+      "PortfolioMainVisualSaveInItemDto": {
+        "type": "object",
+        "properties": {
+          "mainVisualId": {
+            "type": "string",
+            "description": "포트폴리오 메인 visual ID"
+          },
+          "portfolioId": {
+            "type": "string",
+            "description": "작성되는 포트폴리오의 id",
+            "default": "6ae6d61e-4462-4412-9ecd-394b24575795"
+          },
+          "name": {
+            "type": "string",
+            "description": "해당 메인 비주얼의 이름 \n\n(향후 여러개의 메인 비주얼을 작성해두고 교체할 수 있도록 할 것임)",
+            "default": "PORTFOLIO"
+          },
+          "mainVisualUrl": {
+            "type": "string",
+            "description": "메인 비주얼 이미지 url",
+            "default": "(가림: 외부 이미지 URL)"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "포트폴리오에 표시되는 닉네임(제목)",
+            "default": "포트폴리오 닉네임"
+          },
+          "subTitle": {
+            "type": "string",
+            "default": "제목 하단에 표시되는 서브 타이틀"
+          },
+          "portfolioMainVisualTags": {
+            "description": "포트폴리오의 태그",
+            "default": "[ portfolioMainVisualId: 'afe301c5-288c-4323-90b5-87f7cfd10ad6', content: 'tag']",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "mainVisualId",
+          "portfolioId",
+          "name",
+          "mainVisualUrl",
+          "nickName",
+          "subTitle",
+          "portfolioMainVisualTags"
+        ]
+      },
+      "PortfolioMainVisualThemeEntityDto": {
+        "type": "object",
+        "properties": {
+          "portfolioMainVisualId": {
+            "type": "string",
+            "description": "작성되는 포트폴리오 메인 비주얼 ID",
+            "default": "afe301c5-288c-4323-90b5-87f7cfd10ad6"
+          },
+          "controllerClass": {
+            "type": "string",
+            "description": "작성되는 포트폴리오 메인 비주얼 ID",
+            "default": "angulate"
+          },
+          "shareButtonClass": {
+            "type": "string",
+            "description": "작성되는 포트폴리오 메인 비주얼 ID",
+            "default": "angulate"
+          },
+          "titleClass": {
+            "type": "string",
+            "description": "타이틀 클래스",
+            "default": "angulate"
+          },
+          "subTitleClass": {
+            "type": "string",
+            "description": "서브타이틀 클래스",
+            "default": "angulate"
+          },
+          "tagClass": {
+            "type": "string",
+            "description": "태그 타이틀 클래스",
+            "default": "angulate"
+          }
+        },
+        "required": [
+          "portfolioMainVisualId",
+          "controllerClass",
+          "shareButtonClass",
+          "titleClass",
+          "subTitleClass",
+          "tagClass"
+        ]
+      },
+      "PortfolioMainVisualTagEntityDto": {
+        "type": "object",
+        "properties": {
+          "portfolioMainVisualId": {
+            "type": "string",
+            "description": "작성되는 포트폴리오 메인 비주얼 ID",
+            "default": "afe301c5-288c-4323-90b5-87f7cfd10ad6"
+          },
+          "content": {
+            "type": "string",
+            "description": "태그 내용",
+            "default": "TAG"
+          }
+        },
+        "required": [
+          "portfolioMainVisualId",
+          "content"
+        ]
+      },
+      "PortfolioArtWorkBlockCreateDto": {
+        "type": "object",
+        "properties": {
+          "portfolioArtWorkId": {
+            "type": "string",
+            "description": "portfolioArtWorkId",
+            "default": "ecaf78a9-efce-4e1b-8aab-931ad027b3f2"
+          },
+          "blockType": {
+            "type": "string",
+            "description": "block type, image or text",
+            "default": "image"
+          },
+          "sortNumber": {
+            "type": "number",
+            "description": "artworks sort",
+            "default": 0
+          }
+        },
+        "required": [
+          "portfolioArtWorkId",
+          "blockType",
+          "sortNumber"
+        ]
+      },
+      "PortfolioArtWorkBlockSaveDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "sortNumber": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "sortNumber",
+          "title",
+          "description",
+          "visibility"
+        ]
+      },
+      "PortfolioArtWorkPictureSaveDto": {
+        "type": "object",
+        "properties": {
+          "portfolioArtWorkBlockId": {
+            "type": "string",
+            "description": "포트폴리오 작품 블럭 아이디",
+            "default": "4862d218-708a-457c-be1b-b666f7ad6a7f"
+          },
+          "url": {
+            "type": "string",
+            "description": "포트폴리오 작품 이미지 URL",
+            "default": "(가림: S3 버킷 URL)"
+          },
+          "sortNumber": {
+            "type": "number",
+            "description": "포트폴리오 작품 이미지 정렬 기준",
+            "default": 0
+          }
+        },
+        "required": [
+          "portfolioArtWorkBlockId",
+          "url",
+          "sortNumber"
+        ]
+      },
+      "PortfolioHistoryGeneral": {
+        "type": "object",
+        "properties": {}
+      },
+      "PortfolioHistoryContact": {
+        "type": "object",
+        "properties": {}
+      },
+      "FileSaveDto": {
+        "type": "object",
+        "properties": {
+          "authorId": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        },
+        "required": [
+          "authorId",
+          "files"
+        ]
+      }
+    }
+  }
+}
